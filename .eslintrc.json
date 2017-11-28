@@ -10,7 +10,8 @@
     "customElements": false,
     "document": false,
     "fetch": false,
-    "Plotly": false
+    "Plotly": false,
+    "window": false
   },
   "settings": {
     "import/parser": "babel-eslint"

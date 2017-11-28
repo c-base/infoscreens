@@ -1,57 +1,59 @@
-var msgflo = window.infodisplay.msgflo;
-var timeout = null;
+const { msgflo } = window.infodisplay;
+let timeout = null;
 
-var getRotationUrl = function (urls, current) {
-  var newUrl = urls[Math.floor(Math.random() * urls.length)];
+function getRotationUrl(urls, current) {
+  const newUrl = urls[Math.floor(Math.random() * urls.length)];
   if (newUrl === current && urls.length > 1) {
     // Flip the coin again
     return getRotationUrl(urls, current);
   }
   return newUrl;
-};
+}
 
-var DisplayParticipant = function (broker, role, defaultUrls, timer) {
-  var urls = defaultUrls;
-  var def = {
+function DisplayParticipant(broker, role, defaultUrls, timer) {
+  let urls = defaultUrls;
+  let participant;
+  const def = {
     component: 'msgflo-browser/infodisplay',
     label: 'Browser-based information display',
     icon: 'television',
     inports: [
       {
         id: 'open',
-        type: 'string'
-      },
-      {
-        id: 'urls',
-        type: 'array'
-      }
-    ],
-    outports: [
-      {
-        id: 'opened',
-        type: 'string'
+        type: 'string',
       },
       {
         id: 'urls',
         type: 'array',
-        hidden: true
-      }
-    ]
+      },
+    ],
+    outports: [
+      {
+        id: 'opened',
+        type: 'string',
+      },
+      {
+        id: 'urls',
+        type: 'array',
+        hidden: true,
+      },
+    ],
   };
-  var process = function (inport, indata, callback) {
-    var current = document.getElementById('current');
-    var next = document.getElementById('next');
+  const process = (inport, indata, callback) => {
+    const current = document.getElementById('current');
+    const next = document.getElementById('next');
     if (inport === 'urls') {
       // Update URL listing
       urls = indata;
-      return callback('urls', null, urls);
+      callback('urls', null, urls);
     }
-    next.onerror = function (err) {
+    next.onerror = (err) => {
       next.onload = null;
       next.onerror = null;
       participant.send('open', getRotationUrl(urls, indata));
-    }
-    next.onload = function () {
+      callback('open', err);
+    };
+    next.onload = () => {
       next.onload = null;
       next.onerror = null;
       // Cross-fade
@@ -60,31 +62,31 @@ var DisplayParticipant = function (broker, role, defaultUrls, timer) {
       if (timeout) {
         clearTimeout(timeout);
       }
-      timeout = setTimeout(function () {
+      timeout = setTimeout(() => {
         participant.send('open', getRotationUrl(urls, indata));
       }, timer);
-      return callback('opened', null, next.getAttribute('src'));
+      callback('opened', null, next.getAttribute('src'));
     };
     next.setAttribute('src', indata);
     // Rotate internal URLs list
   };
-  var client = new msgflo.mqtt.Client(broker, {});
-  var participant = new msgflo.participant.Participant(client, def, process, role);
+  const client = new msgflo.mqtt.Client(broker, {});
+  participant = new msgflo.participant.Participant(client, def, process, role);
   return participant;
 }
 
-window.addEventListener('load', function () {
-  var params = msgflo.options({
+window.addEventListener('load', () => {
+  const params = msgflo.options({
     broker: 'mqtt://c-beam.cbrp3.c-base.org:1882',
     role: 'infodisplay',
     urls: [
       'http://c-beam.cbrp3.c-base.org/he1display',
-      'https://c-base.org'
+      'https://c-base.org',
     ],
     timer: 120000,
   });
-  var p = DisplayParticipant(params.broker, params.role, params.urls, params.timer);
-  p.start(function (err) {
+  const p = DisplayParticipant(params.broker, params.role, params.urls, params.timer);
+  p.start((err) => {
     if (err) {
       console.error(err);
       return;
