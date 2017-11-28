@@ -1,13 +1,19 @@
 module.exports = {
-  entry: './index.js',
+  entry: {
+    infoscreens: './index.js',
+    infodisplay: './msgflo.js',
+  },
   output: {
     path: __dirname,
-    filename: 'dist/infoscreens.js'
+    filename: 'dist/[name].js',
+    library: '[name]',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
+        exclude: /paho.mqtt.js/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -17,5 +23,14 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  externals: {
+    newrelic: 'commonjs newrelic',
+    tv4: 'commonjs tv4',
+    'ampqlib/callback_api': 'commonjs ampqlib/callback_api',
+    mqtt: 'commonjs mqtt',
+  },
+  node: {
+    fs: 'empty',
+  },
 };
