@@ -7,7 +7,7 @@
     "build": "webpack",
     "pretest": "eslint lib/*.js elements/*.js infodisplay/*.js index.js",
     "start": "http-server . -p 3000 -s",
-    "test": "npm run pretest"
+    "test": "npm run build"
   },
   "author": "Henri Bergius <henri.bergius@iki.fi>",
   "license": "MIT",
