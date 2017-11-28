@@ -1,0 +1,32 @@
+{
+  "name": "infoscreens",
+  "version": "1.0.0",
+  "description": "c-base info screens",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "pretest": "eslint lib/*.js elements/*.js index.js",
+    "start": "http-server . -p 3000 -s",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Henri Bergius <henri.bergius@iki.fi>",
+  "license": "MIT",
+  "dependencies": {
+    "@webcomponents/webcomponentsjs": "^1.0.19",
+    "d3": "^4.12.0",
+    "plotly.js": "^1.31.2",
+    "skatejs": "^5.0.0-beta.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.32",
+    "@babel/preset-env": "^7.0.0-beta.32",
+    "babel-eslint": "^8.0.2",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "eslint": "^4.12.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "http-server": "^0.10.0",
+    "webpack": "^3.8.1"
+  }
+}

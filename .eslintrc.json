@@ -1,0 +1,19 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "class-methods-use-this": 0,
+    "no-continue": 0,
+    "no-plusplus": 0,
+    "object-curly-newline": 0
+  },
+  "globals": {
+    "customElements": false,
+    "document": false,
+    "fetch": false,
+    "Plotly": false
+  },
+  "settings": {
+    "import/parser": "babel-eslint"
+  },
+  "parser": "babel-eslint"
+}
