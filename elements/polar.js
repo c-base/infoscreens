@@ -56,6 +56,7 @@ class Polar extends Component {
       },
       showlegend: false,
       paper_bgcolor: 'transparent',
+      autosize: true,
     };
     let data = [];
     const dayLabels = ts.getDayLabels();

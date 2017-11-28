@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base bar stats</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="../node_modules/plotly.js/dist/plotly.min.js"></script>
+    <script src="../dist/infoscreens.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: "ceva";
+        src: url("../fonts/ceva-c2.woff") format('woff');
+      }
+      @font-face {
+        font-family: "ceva";
+        src: url("../fonts/ceva-c2.ttf") format('ttf');
+      }
+      body {
+        background-color: rgba(0, 0, 0, 0.98);
+        color: #fff;
+        padding: 0px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      h1 {
+        font-family: "ceva", sans-serif;
+      }
+      p {
+        font-family: 'Source Code Pro', sans-serif;
+        font-size: 20px;
+        color: #a0a0a0;
+        margin-top: -10vh;
+      }
+      cbase-polar {
+        height: 80vh;
+        width: 80vh;
+        margin-left: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>bar historical data</h1>
+      <cbase-polar timeseries="bar.open" days="90" percentage></cbase-polar>
+      <p>
+        Likelihood of bar being open at a given hour. Based on last 90 days of data.
+      </p>
+    </main>
+  </body>
+</html>
+
