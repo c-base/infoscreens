@@ -7,7 +7,7 @@
     "build": "webpack",
     "pretest": "eslint lib/*.js elements/*.js index.js",
     "start": "http-server . -p 3000 -s",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run pretest"
   },
   "author": "Henri Bergius <henri.bergius@iki.fi>",
   "license": "MIT",
