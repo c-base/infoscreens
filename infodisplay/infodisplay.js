@@ -95,8 +95,7 @@ window.addEventListener('load', () => {
   const p = DisplayParticipant(params.broker, params.role, params.urls, params.timer);
   p.start((err) => {
     if (err) {
-      console.error(err);
-      return;
+      throw err;
     }
     p.send('open', getRotationUrl(params.urls));
   });
