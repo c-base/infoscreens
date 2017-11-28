@@ -6,9 +6,7 @@ const Component = withComponent();
 class Polar extends Component {
   static props = {
     timeseries: props.string,
-    days: props.number({
-      default: 7,
-    }),
+    days: props.number,
     interpolate: props.boolean,
     accumulate: props.boolean,
     percentage: props.boolean,
@@ -25,6 +23,10 @@ class Polar extends Component {
   }
 
   render({ timeseries, interpolate, accumulate, percentage, days }) {
+    let daySlots = days;
+    if (!daySlots) {
+      daySlots = 7;
+    }
     const el = document.createElement('div');
     if (!this.enableFetch) {
       // Not yet connected
@@ -34,7 +36,7 @@ class Polar extends Component {
       // We're re-rendering, cancel previous
       this.ts.canceled = true;
     }
-    const ts = new Timeseries(timeseries, new Date(), days);
+    const ts = new Timeseries(timeseries, new Date(), daySlots);
     const layout = {
       orientation: 270,
       direction: 'clockwise',
