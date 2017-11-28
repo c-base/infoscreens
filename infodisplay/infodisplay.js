@@ -47,6 +47,13 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
       urls = indata;
       callback('urls', null, urls);
     }
+    if (next.getAttribute('src') === indata) {
+      // Already open!
+      next.id = 'current';
+      current.id = 'next';
+      callback('opened', null, next.getAttribute('src'));
+      return;
+    }
     next.onerror = (err) => {
       next.onload = null;
       next.onerror = null;
