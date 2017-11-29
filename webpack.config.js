@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
     infoscreens: './index.js',
-    infodisplay: './msgflo.js',
+    infodisplay: './infodisplay/infodisplay.js',
   },
   output: {
     path: __dirname,

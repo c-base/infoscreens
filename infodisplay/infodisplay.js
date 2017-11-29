@@ -1,4 +1,5 @@
-const { msgflo } = window.infodisplay;
+import msgflo from 'msgflo-browser';
+
 let timeout = null;
 
 function getRotationUrl(urls, current) {
