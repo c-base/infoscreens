@@ -50,6 +50,7 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
       // Update URL listing
       urls = indata;
       callback('urls', null, urls);
+      return;
     }
     if (next.getAttribute('src') === indata) {
       // Already open!
@@ -86,7 +87,8 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
   return participant;
 }
 
-window.addEventListener('load', () => {
+function onPageReady() {
+  window.removeEventListener('load', onPageReady, false);
   const params = msgflo.options({
     broker: 'mqtt://c-beam.cbrp3.c-base.org:1882',
     role: 'infodisplay',
@@ -103,4 +105,5 @@ window.addEventListener('load', () => {
     }
     p.send('open', getRotationUrl(params.urls));
   });
-}, false);
+}
+window.addEventListener('load', onPageReady, false);
