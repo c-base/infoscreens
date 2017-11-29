@@ -16,21 +16,24 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
   let participant;
   const def = {
     component: 'msgflo-browser/infodisplay',
-    label: 'Browser-based information display',
+    label: 'Show URL on a public screen.',
     icon: 'television',
     inports: [
       {
         id: 'open',
+        description: 'URL to be opened',
         type: 'string',
       },
       {
         id: 'urls',
+        description: 'URL list for rotation',
         type: 'array',
       },
     ],
     outports: [
       {
         id: 'opened',
+        description: 'The URL that has been opened and is showing.',
         type: 'string',
       },
       {
