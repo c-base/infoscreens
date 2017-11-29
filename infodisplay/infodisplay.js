@@ -15,7 +15,7 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
   let urls = defaultUrls;
   let participant;
   const def = {
-    component: 'msgflo-browser/infodisplay',
+    component: 'c-base/infodisplay',
     label: 'Show URL on a public screen.',
     icon: 'television',
     inports: [
