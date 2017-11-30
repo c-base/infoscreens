@@ -22,8 +22,6 @@ class LineChart extends Component {
   static props = {
     timeseries: props.string,
     days: props.number,
-    interpolate: props.boolean,
-    accumulate: props.boolean,
     data: props.array,
     shape: props.string,
     width: props.number,
