@@ -1,8 +1,21 @@
 import { withComponent, props } from 'skatejs';
-import { Timeseries } from '../lib/timeseries';
 import { colors } from '../lib/colors';
+import { parseValue } from '../lib//values';
 
 const Component = withComponent();
+
+const legendLabel = (datasets, idx) => {
+  const parts = datasets.map(set => set.split('.'));
+  let uniques = parts[idx].filter((part, idx) => {
+    for (let i = 0; i < parts.length; i++) {
+      if (parts[i][idx] !== part) {
+        return true;
+      }
+    }
+    return false;
+  });
+  return uniques.join('.');
+};
 
 class LineChart extends Component {
   static props = {
@@ -12,31 +25,31 @@ class LineChart extends Component {
     accumulate: props.boolean,
     data: props.array,
     shape: props.string,
+    width: props.number,
+    height: props.number,
   };
-
 
   connected() {
     if (!this.timeseries || !this.timeseries.length) {
       return;
     }
-    const daySlots = this.days || 1;
+    const days = this.days || 1;
     const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
     const promises = this.timeseries.split(' ').map((dataset) => {
-      const ts = new Timeseries(dataset, endDate, daySlots);
-      if (!this.ts) {
-        // We need one for labeling
-        this.ts = ts;
-      }
-      return ts.getData({
-        interpolate: this.interpolate,
-        accumulate: this.accumulate,
-        usePreviousValue: false,
-      });
+      return this.fetch(dataset, startDate, endDate);
     });
     Promise.all(promises)
       .then((res) => {
         this.data = res;
       });
+  }
+
+  fetch(timeseries, start, end) {
+    const url = `http://openmct.cbrp3.c-base.org/telemetry/${timeseries}?start=${start.getTime()}&end=${end.getTime()}`;
+    return fetch(url)
+      .then(data => data.json())
   }
 
   renderer(renderRoot, render) {
@@ -45,60 +58,37 @@ class LineChart extends Component {
       root.removeChild(root.firstChild);
     }
     root.appendChild(render());
+
+    // Hack for Shadow DOM compat
+    const styles = document.createElement('style');
+    styles.innerText = `
+      .js-plotly-plot .plotly .main-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }`;
+    root.appendChild(styles);
   }
 
-  joinDays(values, slotLabels) {
-    let data = [];
-    let labels = [];
-    // Padding is hack for https://github.com/plotly/plotly.js/issues/1516
-    let pad = '';
-    values.forEach((val, idx) => {
-      let vals = val;
-      if (idx === values.length - 1) {
-        // Last one, remove trailing zeros
-        let lastVal = vals.length - 1;
-        for (let i = lastVal; i > 0; i--) {
-          if (vals[i] !== 0) {
-            lastVal = i;
-            break;
-          }
-        }
-        vals = val.slice(0, lastVal);
-      }
-      data = data.concat(vals);
-      labels = labels.concat(slotLabels.slice(0, vals.length).map(label => `${label}${pad}`));
-      pad += ' ';
-    });
-
-    const daySlots = this.days || 1;
-    if (data.length > daySlots * 24) {
-      const surplus = data.length - daySlots * 24;
-      data = data.slice(surplus);
-      console.log(this.days * 24, surplus, data.length);
-      labels = labels.slice(surplus);
-    }
-
-    return {
-      data,
-      labels,
-    };
-  }
-
-  render({ data, ts, shape }) {
+  render({ data, shape, width, height }) {
     const el = document.createElement('div');
-    if (!data || !data.length || !ts) {
+    if (!data || !data.length) {
       // No data yet
       return el;
     }
     const lineShape = shape || 'spline';
+    const graphWidth = Math.floor(window.innerWidth / 100 * (width || 40));
+    const graphHeight = Math.floor(window.innerHeight / 100 * (height || 50));
+    const datasets = this.timeseries.split(' ');
+    const showLegend = (datasets.length > 1) ? true : false;
     const graphData = data.map((values, idx) => {
-      const d = this.joinDays(values, this.ts.getSlotLabels());
       const res = {
-        x: d.labels,
-        y: d.data,
+        y: values.map(point => parseValue(point.value)),
+        x: values.map(point => new Date(point.timestamp)),
         type: 'scatter',
         mode: 'lines',
-        name: this.timeseries.split(' ')[idx],
+        name: legendLabel(datasets, idx),
         line: {
           shape: lineShape,
         },
@@ -108,8 +98,10 @@ class LineChart extends Component {
       }
       return res;
     });
-    console.log(graphData);
     const layout = {
+      autosize: false,
+      width: graphWidth,
+      height: graphHeight,
       yaxis: {
         tickfont: {
           family: 'Source Code Pro',
@@ -118,7 +110,6 @@ class LineChart extends Component {
         gridcolor: '#204a87',
       },
       xaxis: {
-        type: 'category',
         tickfont: {
           family: 'Source Code Pro',
         },
@@ -133,13 +124,18 @@ class LineChart extends Component {
       },
       legend: {
         orientation: 'h',
-        x: 0,
-        y: 0,
         font: {
           family: 'Source Code Pro',
         },
+        x: 0,
+        y: 1,
+        bgcolor: 'rgba(0, 0, 0, 0.6)',
       },
-      showlegend: true,
+      margin: {
+        t: 0,
+        r: 0,
+      },
+      showlegend: showLegend,
       paper_bgcolor: 'transparent',
       plot_bgcolor: 'transparent',
     };
