@@ -55,7 +55,7 @@
           message = decodeURIComponent(window.location.search.substr(1));
         }
         var container = document.getElementById('announcement');
-        if (message.length < 100) {
+        if (message.length < 80) {
           container.className = 'short';
         }
         if (message.length < 40) {
