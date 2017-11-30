@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../theme/c-base.css">
     <style>
       h1 {
-        font-size: 8vh;
-        width: 80vw;
+        font-size: 8vmin;
+        width: 100vw;
         text-align: center;
         margin: 0px;
         padding: 0px;
-        line-height: 10vh;
+        line-height: 10vmin;
       }
       main {
         display: flex;
@@ -23,7 +23,7 @@
         flex-direction: column;
       }
       p {
-        font-size: 6vh;
+        font-size: 6vmin;
         margin: 0px;
         padding: 0px;
         margin-top: -10vh;
@@ -34,6 +34,11 @@
         height: 72vh;
         width: 72vh;
         margin-left: 80px;
+      }
+      @media (orientation: portrait) {
+        p {
+          width: 95vw;
+        }
       }
     </style>
   </head>
