@@ -61,6 +61,11 @@ class Heatmap extends Component {
         },
       },
       paper_bgcolor: 'transparent',
+      margin: {
+        r: 0,
+        t: 0,
+        b: 0,
+      },
     };
     this.ts = ts;
     ts.getData({
