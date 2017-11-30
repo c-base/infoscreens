@@ -1,5 +1,7 @@
 import { withComponent, props } from 'skatejs';
 import { Timeseries } from '../lib/timeseries';
+import { colors } from '../lib/colors';
+import injectCss from '../lib/plotly-shadowdom';
 
 const Component = withComponent();
 
@@ -11,6 +13,7 @@ class Polar extends Component {
     accumulate: props.boolean,
     percentage: props.boolean,
     data: props.array,
+    size: props.number,
   };
 
   connected() {
@@ -31,16 +34,21 @@ class Polar extends Component {
 
   renderer(renderRoot, render) {
     const root = renderRoot;
-    root.innerHtml = '';
+    while (root.firstChild) {
+      root.removeChild(root.firstChild);
+    }
     root.appendChild(render());
+    injectCss(root);
   }
 
-  render({ percentage, data, ts }) {
+  render({ percentage, data, ts, size }) {
     const el = document.createElement('div');
     if (!data || !data.length || !ts) {
       // No data yet
       return el;
     }
+    const vmin = Math.min(window.innerWidth, window.innerHeight);
+    const graphSize = Math.floor((vmin / 100) * (size || 40));
     const layout = {
       orientation: 270,
       direction: 'clockwise',
@@ -60,7 +68,9 @@ class Polar extends Component {
       },
       showlegend: false,
       paper_bgcolor: 'transparent',
-      autosize: true,
+      autosize: false,
+      width: graphSize,
+      height: graphSize,
       margin: {
         l: 0,
         r: 0,
@@ -77,7 +87,7 @@ class Polar extends Component {
         name: dayLabels[dayIdx],
         type: 'area',
         marker: {
-          color: '#f57900',
+          color: colors[2],
         },
         opacity: 0.8,
         showlegend: false,

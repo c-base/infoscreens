@@ -18,6 +18,8 @@
       }
       main {
         display: flex;
+        width: 100vw;
+        height: 98vh;
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -26,18 +28,17 @@
         font-size: 6vmin;
         margin: 0px;
         padding: 0px;
-        margin-top: -10vh;
         width: 80vw;
         text-align: center;
       }
       cbase-polar {
-        height: 72vh;
-        width: 72vh;
-        margin-left: 80px;
+        height: 72vmin;
+        width: 72vmin;
       }
       @media (orientation: portrait) {
         p {
           width: 95vw;
+          font-size: 5vmin;
         }
       }
     </style>
@@ -45,7 +46,7 @@
   <body>
     <main>
       <h1>bar historical data</h1>
-      <cbase-polar timeseries="bar.open" days="90" percentage></cbase-polar>
+      <cbase-polar timeseries="bar.open" days="90" size="72" percentage></cbase-polar>
       <p>
         Likelihood of bar being open at a given hour. Based on last 90 days.
       </p>
