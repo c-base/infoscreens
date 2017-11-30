@@ -1,6 +1,7 @@
 import { withComponent, props } from 'skatejs';
 import { Timeseries } from '../lib/timeseries';
 import injectCss from '../lib/plotly-shadowdom';
+import { colors } from '../lib/colors';
 
 const Component = withComponent();
 
@@ -53,8 +54,7 @@ class Heatmap extends Component {
       type: 'heatmap',
       colorscale: [
         ['0.0', 'rgb(0, 0, 0)'],
-        ['0.9', 'rgb(255, 0, 0)'],
-        ['1.0', 'rgb(128, 0, 0)'],
+        ['1.0', colors[2]],
       ],
       showlegend: false,
       showscale: false,
@@ -68,18 +68,27 @@ class Heatmap extends Component {
         tickfont: {
           family: 'Source Code Pro',
         },
+        tickcolor: '#204a87',
+        gridcolor: '#204a87',
       },
       xaxis: {
         type: 'category',
         tickfont: {
           family: 'Source Code Pro',
         },
+        tickcolor: '#204a87',
+        gridcolor: '#204a87',
+      },
+      font: {
+        family: ['Source Code Pro', 'sans-serif'],
+        size: 16,
+        color: '#fff',
+        outlineColor: 'transparent',
       },
       paper_bgcolor: 'transparent',
       margin: {
         r: 0,
         t: 0,
-        b: 0,
       },
     };
     Plotly.newPlot(el, graphData, layout, {
