@@ -1,0 +1,83 @@
+<!DOCTYPE html
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base bar status</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="../dist/infoscreens.js"></script>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style>
+      h1 {
+        font-size: 8vh;
+        width: 100vw;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+        line-height: 10vh;
+      }
+      h2 {
+        font-size: 3vh;
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        width: 20vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      main section {
+        margin: 2px;
+      }
+      cbase-currentstate {
+        display: block;
+        width: 240px;
+        height: 160px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>current drinks status</h1>
+    <main>
+      <section>
+        <h2>bar status</h2>
+        <cbase-currentstate timeseries="bar.open" interval="10"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>club mate</h2>
+        <cbase-currentstate timeseries="bar.replicator.1" interval="120"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>berliner 1</h2>
+        <cbase-currentstate timeseries="bar.replicator.2" interval="120"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>berliner 2</h2>
+        <cbase-currentstate timeseries="bar.replicator.3" interval="120"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>flora</h2>
+        <cbase-currentstate timeseries="bar.replicator.4" interval="120"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>premiumcola</h2>
+        <cbase-currentstate timeseries="bar.replicator.5" interval="120"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>spezi</h2>
+        <cbase-currentstate timeseries="bar.replicator.6" interval="120"></cbase-currentstate>
+      </section>
+      <section>
+        <h2>kraftmalz</h2>
+        <cbase-currentstate timeseries="bar.replicator.7" interval="120"></cbase-currentstate>
+      </section>
+    </main>
+  </body>
+</html>
+
