@@ -1,0 +1,31 @@
+
+@font-face {
+  font-family: 'ceva';
+  src: url('ceva-c2.woff') format('woff');
+}
+@font-face {
+  font-family: 'ceva';
+  src: url('ceva-c2.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('SourceCodePro-Regular.otf.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('SourceCodePro-Bold.otf.woff') format('woff');
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Source Code Pro', sans-serif;
+  background-color: rgba(0, 0, 0, 0.98);
+  color: #a0a0a0;
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1 {
+  font-family: 'ceva', sans-serif;
+  color: #fff;
+}
