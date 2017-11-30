@@ -58,6 +58,7 @@ class CurrentState extends Component {
     el.style.height = '100%';
     if (!statusknown) {
       el.style.backgroundColor = '#555753';
+      el.innerHTML = '<slot></slot>';
       return el;
     }
     if (status) {
