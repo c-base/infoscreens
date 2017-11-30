@@ -10,10 +10,23 @@ class Polar extends Component {
     interpolate: props.boolean,
     accumulate: props.boolean,
     percentage: props.boolean,
+    data: props.array,
   };
 
   connected() {
-    this.enableFetch = true;
+    if (!this.timeseries) {
+      return;
+    }
+    const daySlots = this.days || 7;
+    this.ts = new Timeseries(this.timeseries, new Date(), daySlots);
+    this.ts.getData({
+      interpolate: this.interpolate,
+      accumulate: this.accumulate,
+      usePreviousValue: false,
+    })
+      .then((values) => {
+        this.data = values;
+      });
   }
 
   renderer(renderRoot, render) {
@@ -22,21 +35,12 @@ class Polar extends Component {
     root.appendChild(render());
   }
 
-  render({ timeseries, interpolate, accumulate, percentage, days }) {
-    let daySlots = days;
-    if (!daySlots) {
-      daySlots = 7;
-    }
+  render({ percentage, data, ts }) {
     const el = document.createElement('div');
-    if (!this.enableFetch) {
-      // Not yet connected
+    if (!data || !data.length || !ts) {
+      // No data yet
       return el;
     }
-    if (this.ts) {
-      // We're re-rendering, cancel previous
-      this.ts.canceled = true;
-    }
-    const ts = new Timeseries(timeseries, new Date(), daySlots);
     const layout = {
       orientation: 270,
       direction: 'clockwise',
@@ -64,10 +68,10 @@ class Polar extends Component {
         b: 0,
       },
     };
-    let data = [];
+    let graphData = [];
     const dayLabels = ts.getDayLabels();
     ts.prepareSlots().forEach((day, dayIdx) => {
-      data.push({
+      graphData.push({
         r: day,
         t: ts.getSlotLabels(),
         name: dayLabels[dayIdx],
@@ -79,37 +83,25 @@ class Polar extends Component {
         showlegend: false,
       });
     });
-    this.ts = ts;
-    ts.getData({
-      interpolate,
-      accumulate,
-      usePreviousValue: false,
-    })
-      .then((values) => {
-        if (ts.canceled) {
-          el.innerHTML = '';
-          return;
-        }
-        if (percentage) {
-          data = data.slice(0);
-          const result = ts.getSlotLabels().map(() => 0);
-          values.forEach((day) => {
-            day.forEach((val, idx) => {
-              result[idx] += val;
-            });
-          });
-          data[0].r = result.map(r => (r / ts.days) * 100);
-        } else {
-          values.forEach((day, dayIdx) => {
-            day.forEach((val, idx) => {
-              data[dayIdx].r[idx] = val;
-            });
-          });
-        }
-        Plotly.newPlot(el, data, layout, {
-          staticPlot: true,
+    if (percentage) {
+      graphData = graphData.slice(0);
+      const result = ts.getSlotLabels().map(() => 0);
+      data.forEach((day) => {
+        day.forEach((val, idx) => {
+          result[idx] += val;
         });
       });
+      graphData[0].r = result.map(r => (r / ts.days) * 100);
+    } else {
+      data.forEach((day, dayIdx) => {
+        day.forEach((val, idx) => {
+          graphData[dayIdx].r[idx] = val;
+        });
+      });
+    }
+    Plotly.newPlot(el, graphData, layout, {
+      staticPlot: true,
+    });
     return el;
   }
 }

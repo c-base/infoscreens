@@ -9,9 +9,22 @@ class Heatmap extends Component {
     days: props.number,
     interpolate: props.boolean,
     accumulate: props.boolean,
+    data: props.array,
   };
   connected() {
-    this.enableFetch = true;
+    if (!this.timeseries) {
+      return;
+    }
+    const daySlots = this.days || 7;
+    this.ts = new Timeseries(this.timeseries, new Date(), daySlots);
+    this.ts.getData({
+      interpolate: this.interpolate,
+      accumulate: this.accumulate,
+      usePreviousValue: false,
+    })
+      .then((values) => {
+        this.data = values;
+      });
   }
   renderer(renderRoot, render) {
     const root = renderRoot;
@@ -19,25 +32,16 @@ class Heatmap extends Component {
     root.appendChild(render());
   }
 
-  render({ timeseries, interpolate, accumulate, days }) {
-    let daySlots = days;
-    if (!daySlots) {
-      daySlots = 7;
-    }
+  render({ data, ts }) {
     const el = document.createElement('div');
-    if (!this.enableFetch) {
-      // Not yet connected
+    if (!data || !data.length || !ts) {
+      // No data yet
       return el;
     }
-    if (this.ts) {
-      // We're re-rendering, cancel previous
-      this.ts.canceled = true;
-    }
-    const ts = new Timeseries(timeseries, new Date(), daySlots);
-    const data = [{
+    const graphData = [{
       x: ts.getSlotLabels(),
       y: ts.getDayLabels(),
-      z: ts.prepareSlots(),
+      z: data,
       type: 'heatmap',
       colorscale: [
         ['0.0', 'rgb(0, 0, 0)'],
@@ -67,21 +71,9 @@ class Heatmap extends Component {
         b: 0,
       },
     };
-    this.ts = ts;
-    ts.getData({
-      interpolate,
-      accumulate,
-    })
-      .then((values) => {
-        if (ts.canceled) {
-          el.innerHTML = '';
-          return;
-        }
-        data[0].z = values;
-        Plotly.newPlot(el, data, layout, {
-          staticPlot: true,
-        });
-      });
+    Plotly.newPlot(el, graphData, layout, {
+      staticPlot: true,
+    });
     return el;
   }
 }
