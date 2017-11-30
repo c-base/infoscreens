@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base visual paging</title>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style type="text/css">
+      h1 {
+        width: 100vw;
+        text-align: center;
+        position: absolute;
+        font-size: 6vh;
+        top: 0px;
+        left: 0px;
+      }
+      main {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      p#announcement {
+        padding-top: 7vh;
+        padding-bottom: 7vh;
+        color: #ffffff;
+        font-size: 7vh;
+        text-align: center;
+        width: 80vw;
+      }
+      p#announcement.tiny {
+        font-size: 15vh;
+      }
+      p#announcement.short {
+        font-size: 10vh;
+      }
+      p#announcement.long {
+        font-size: 5vh;
+      }
+    </style>
+  </head>
+  <body class="station">
+    <h1>c-base space station</h1>
+    <main>
+      <p id="announcement"></p>
+    </main>
+    <script>
+      var fallback = 'Security advise. Due to intergalactic regulations, passengers are required to keep their antigravity generators with them at all times.';
+      document.addEventListener('DOMContentLoaded', function () {
+        var message = fallback;
+        if (window.location.search) {
+          message = decodeURIComponent(window.location.search.substr(1));
+        }
+        var container = document.getElementById('announcement');
+        if (message.length < 100) {
+          container.className = 'short';
+        }
+        if (message.length < 40) {
+          container.className = 'tiny';
+        }
+        if (message.length > 300) {
+          container.className = 'long';
+        }
+        container.innerHTML = message;
+      });
+    </script>
+  </body>
+</html>
