@@ -1,5 +1,6 @@
 import { withComponent, props } from 'skatejs';
 import { Timeseries } from '../lib/timeseries';
+import injectCss from '../lib/plotly-shadowdom';
 
 const Component = withComponent();
 
@@ -10,6 +11,8 @@ class Heatmap extends Component {
     interpolate: props.boolean,
     accumulate: props.boolean,
     data: props.array,
+    width: props.number,
+    height: props.number,
   };
   connected() {
     if (!this.timeseries) {
@@ -28,16 +31,21 @@ class Heatmap extends Component {
   }
   renderer(renderRoot, render) {
     const root = renderRoot;
-    root.innerHtml = '';
+    while (root.firstChild) {
+      root.removeChild(root.firstChild);
+    }
     root.appendChild(render());
+    injectCss(root);
   }
 
-  render({ data, ts }) {
+  render({ data, ts, width, height }) {
     const el = document.createElement('div');
     if (!data || !data.length || !ts) {
       // No data yet
       return el;
     }
+    const graphWidth = Math.floor((window.innerWidth / 100) * (width || 40));
+    const graphHeight = Math.floor((window.innerHeight / 100) * (height || 50));
     const graphData = [{
       x: ts.getSlotLabels(),
       y: ts.getDayLabels(),
@@ -52,6 +60,9 @@ class Heatmap extends Component {
       showscale: false,
     }];
     const layout = {
+      autosize: false,
+      width: graphWidth,
+      height: graphHeight,
       yaxis: {
         autorange: 'reversed',
         tickfont: {
