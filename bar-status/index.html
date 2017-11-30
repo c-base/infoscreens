@@ -37,8 +37,18 @@
       }
       cbase-currentstate {
         display: block;
-        width: 240px;
-        height: 160px;
+        width: 20vw;
+        height: 20vh;
+      }
+      cbase-time {
+        font-family: 'ceva', sans-serif;
+        margin-top: 10vh;
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 8vh;
+        color: #fff;
       }
     </style>
   </head>
@@ -78,6 +88,7 @@
         <cbase-currentstate timeseries="bar.replicator.7" interval="120"></cbase-currentstate>
       </section>
     </main>
+    <cbase-time interval="1"></cbase-time>
   </body>
 </html>
 
