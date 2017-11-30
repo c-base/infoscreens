@@ -32,7 +32,8 @@ h1 {
 }
 
 body.station {
-  background: url('../theme/background-stationblueprint.jpg') no-repeat;
+  background-image: url('../theme/background-stationblueprint.jpg');
+  background-repeat: no-repeat;
   background-size: 'cover';
 }
 body.station:after {
@@ -42,7 +43,7 @@ body.station:after {
   height: 100vh;
   top: 0px;
   left: 0px;
-  background:rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5);
   z-index: -1;
 }
 body.station h1,
