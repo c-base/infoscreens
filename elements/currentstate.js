@@ -65,6 +65,7 @@ class CurrentState extends Component {
     } else {
       el.style.backgroundColor = '#cc0000';
     }
+    el.innerHTML = '<slot></slot>';
     return el;
   }
 }
