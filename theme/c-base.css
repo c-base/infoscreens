@@ -25,7 +25,27 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 h1 {
   font-family: 'ceva', sans-serif;
   color: #fff;
+}
+
+body.station {
+  background: url('../theme/background-stationblueprint.jpg') no-repeat;
+  background-size: 'cover';
+}
+body.station:after {
+  content: '\A';
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background:rgba(0,0,0,0.5);
+  z-index: -1;
+}
+body.station h1,
+body.station p {
+  text-shadow: #000000 1px 0 10px;
 }
