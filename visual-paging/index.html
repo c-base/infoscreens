@@ -9,7 +9,7 @@
         width: 100vw;
         text-align: center;
         position: absolute;
-        font-size: 6vh;
+        font-size: 6vmin;
         top: 0px;
         left: 0px;
       }
@@ -30,21 +30,30 @@
       p#announcement {
         margin-left: auto;
         margin-right: auto;
-        padding-top: 7vh;
-        padding-bottom: 7vh;
+        padding-top: 7vmax;
+        padding-bottom: 7vmax;
         color: #ffffff;
-        font-size: 7vh;
+        font-size: 7vmin;
         text-align: center;
         width: 80vw;
       }
       p#announcement.tiny {
-        font-size: 15vh;
+        font-size: 15vmin;
       }
       p#announcement.short {
-        font-size: 10vh;
+        font-size: 10vmin;
       }
       p#announcement.long {
-        font-size: 5vh;
+        font-size: 5vmin;
+      }
+      @media (orientation: portrait) {
+        p#announcement {
+          width: 95vw;
+          padding-bottom: 3vmax;
+        }
+        p#announcement.tiny {
+          font-size: 10vmin;
+        }
       }
     </style>
   </head>
