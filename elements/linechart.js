@@ -1,6 +1,7 @@
 import { withComponent, props } from 'skatejs';
 import { colors } from '../lib/colors';
-import { parseValue } from '../lib//values';
+import { parseValue } from '../lib/values';
+import injectCss from '../lib/plotly-shadowdom';
 
 const Component = withComponent();
 
@@ -56,17 +57,7 @@ class LineChart extends Component {
       root.removeChild(root.firstChild);
     }
     root.appendChild(render());
-
-    // Hack for Shadow DOM compat
-    const styles = document.createElement('style');
-    styles.innerText = `
-      .js-plotly-plot .plotly .main-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }`;
-    root.appendChild(styles);
+    injectCss(root);
   }
 
   render({ data, shape, width, height }) {
