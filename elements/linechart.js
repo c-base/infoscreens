@@ -6,9 +6,9 @@ const Component = withComponent();
 
 const legendLabel = (datasets, idx) => {
   const parts = datasets.map(set => set.split('.'));
-  let uniques = parts[idx].filter((part, idx) => {
+  const uniques = parts[idx].filter((part, index) => {
     for (let i = 0; i < parts.length; i++) {
-      if (parts[i][idx] !== part) {
+      if (parts[i][index] !== part) {
         return true;
       }
     }
@@ -37,9 +37,7 @@ class LineChart extends Component {
     const endDate = new Date();
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - days);
-    const promises = this.timeseries.split(' ').map((dataset) => {
-      return this.fetch(dataset, startDate, endDate);
-    });
+    const promises = this.timeseries.split(' ').map(dataset => this.fetch(dataset, startDate, endDate));
     Promise.all(promises)
       .then((res) => {
         this.data = res;
@@ -49,7 +47,7 @@ class LineChart extends Component {
   fetch(timeseries, start, end) {
     const url = `http://openmct.cbrp3.c-base.org/telemetry/${timeseries}?start=${start.getTime()}&end=${end.getTime()}`;
     return fetch(url)
-      .then(data => data.json())
+      .then(data => data.json());
   }
 
   renderer(renderRoot, render) {
@@ -78,10 +76,10 @@ class LineChart extends Component {
       return el;
     }
     const lineShape = shape || 'spline';
-    const graphWidth = Math.floor(window.innerWidth / 100 * (width || 40));
-    const graphHeight = Math.floor(window.innerHeight / 100 * (height || 50));
+    const graphWidth = Math.floor((window.innerWidth / 100) * (width || 40));
+    const graphHeight = Math.floor((window.innerHeight / 100) * (height || 50));
     const datasets = this.timeseries.split(' ');
-    const showLegend = (datasets.length > 1) ? true : false;
+    const showLegend = (datasets.length > 1);
     const graphData = data.map((values, idx) => {
       const res = {
         y: values.map(point => parseValue(point.value)),
