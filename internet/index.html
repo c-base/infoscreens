@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base network traffic</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="../node_modules/plotly.js/dist/plotly.min.js"></script>
+    <script src="../dist/infoscreens.js"></script>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style>
+      h1 {
+        font-size: 6vmin;
+        width: 100vw;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+        line-height: 6vmin;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>c-base network traffic</h1>
+    <cbase-linechart timeseries="echelon.kdg.rx echelon.kdg.tx echelon.ipb.rx echelon.ipb.tx" width="98" height="90"></cbase-linechart>
+  </body>
+</html>
+
