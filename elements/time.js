@@ -13,7 +13,6 @@ class Time extends Component {
     if (!this.time) {
       this.time = Date.now();
     }
-    console.log(this.time, this.interval);
     if (!this.interval) {
       return;
     }
@@ -35,7 +34,7 @@ class Time extends Component {
   }
 
   render({ time, format }) {
-    let useFormat = format || 'ddd ddS HH:MM:ss';
+    const useFormat = format || 'ddd ddS HH:MM:ss';
     return dateformat(new Date(time), useFormat);
   }
 }
