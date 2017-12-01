@@ -28,6 +28,7 @@ The URLs give here will generally only work inside the c-base member network.
 * [mainhall](http://c-flo.cbrp3.c-base.org/mainhall/)
 * [c-lab](http://c-flo.cbrp3.c-base.org/c_lab/)
 * [soundlab](http://c-flo.cbrp3.c-base.org/soundlab/)
+* [weltenbaulab](http://c-flo.cbrp3.c-base.org/weltenbaulab/)
 * [workshop](http://c-flo.cbrp3.c-base.org/workshop/)
 
 There are also screens available from c-beam:
