@@ -70,11 +70,7 @@ function renderEvent(event, container) {
   destination.innerHTML = event.title;
 
   if (startDate.toDateString() !== prevDate.toDateString()) {
-    if (window.innerWidth > window.innerHeight) {
-      status.innerHTML = dateformat(startDate, 'ddd dd.mm.');
-    } else {
-      status.innerHTML = dateformat(startDate, 'dd.mm.');
-    }
+    status.innerHTML = dateformat(startDate, 'dd.mm.');
   }
   if (startDate.toDateString() === now.toDateString()) {
     row.classList.add('today');
