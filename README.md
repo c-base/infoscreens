@@ -13,6 +13,10 @@ We have several implementations of the infodisplay software:
 * [mqttwebview](https://github.com/c-base/mqttwebview) -- Python implementation mostly used as Linux screensaver in interactive terminals
 * [c-beam-viewer](https://github.com/c-base/c-beam-viewer) -- Android implementation for wall-mounted tablets
 
+The standard MsgFlo signature provides an `open` inport for sending new URLs for a display to open, and `opened` outport to tell when a URL has been opened:
+
+![Info display as seen in Flowhub](https://i.imgur.com/iRbjFdH.png)
+
 ## Updating URL lists
 
 Most of our infodisplays are deployed using Ansible. You can find the configuration in [c-flo repository](https://github.com/c-base/c-flo/tree/master/ansible).
