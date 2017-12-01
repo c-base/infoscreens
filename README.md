@@ -1,7 +1,5 @@
-c-base information displays [![Build Status](https://travis-ci.org/c-base/infoscreens.svg?branch=master)](https://travis-ci.org/c-base/infoscreens)
+c-base information displays [![Build Status](https://travis-ci.org/c-base/infoscreens.svg?branch=master)](https://travis-ci.org/c-base/infoscreens) [![Greenkeeper badge](https://badges.greenkeeper.io/c-base/infoscreens.svg)](https://greenkeeper.io/)
 ===========================
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/c-base/infoscreens.svg)](https://greenkeeper.io/)
 
 [c-base](https://c-base.org/) has a set of information displays located around the station, showing various statistics, current events, and notifications.
 
