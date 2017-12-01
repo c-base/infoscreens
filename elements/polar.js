@@ -71,12 +71,6 @@ class Polar extends Component {
       autosize: false,
       width: graphSize,
       height: graphSize,
-      margin: {
-        l: 0,
-        r: 0,
-        t: 0,
-        b: 0,
-      },
     };
     let graphData = [];
     const dayLabels = ts.getDayLabels();
