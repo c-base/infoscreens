@@ -56,6 +56,9 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
       // Already open!
       next.id = 'current';
       current.id = 'next';
+      timeout = setTimeout(() => {
+        participant.send('open', getRotationUrl(urls, indata));
+      }, timer);
       callback('opened', null, next.getAttribute('src'));
       return;
     }
