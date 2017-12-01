@@ -66,7 +66,7 @@ This is typically triggered by a MsgFlo participant, for example the [boardingur
 
 ## Development
 
-Data visualization elements are built in ES6 with [SkateJS](http://skatejs.netlify.com/).
+Data visualization elements are built in ES6 with [SkateJS](http://skatejs.netlify.com/) and [Plotly](https://plot.ly/javascript/).
 
 Screens are plain HTML that uses various data visualization elements.
 
