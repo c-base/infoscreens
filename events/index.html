@@ -32,7 +32,7 @@
       #events td.destination {
         color: hsl(35, 98%, 36%);
         font-weight: bold;
-        max-width: 46vw;
+        max-width: 55vw;
         max-height: 17vmin;
         padding-right: 2vw;
         overflow: hidden;
@@ -52,6 +52,8 @@
         text-align: right;
         text-transform: lowercase;
         white-space: nowrap;
+        padding-left: 1vw;
+        padding-right: 1vw;
         padding-top: 2vmin;
         font-size: 5vmin;
       }
@@ -59,11 +61,10 @@
         background-color: hsl(35, 98%, 46%);
         text-align: center;
         text-shadow: none;
-        padding-top: 0px;
-        font-size: 7vmin;
+        padding-top: 1vmin;
         color: #000;
       }
-      #events td.status.ongoing {
+      #events tr.today td.status.ongoing {
         background-color: #73d216;
       }
       cbase-time, h1 {
@@ -89,6 +90,11 @@
         margin-right: 3vw;
       }
       @media (orientation: portrait) {
+        #events td.code {
+          display: none;
+        }
+      }
+      @media (max-width: 1140px) {
         #events td.code {
           display: none;
         }
