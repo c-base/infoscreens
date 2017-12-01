@@ -42,6 +42,7 @@ There are also screens available from c-beam:
 
 ### Other screens
 
+* [upcoming events](http://c-flo.cbrp3.c-base.org/events/)
 * [bar historical data](http://c-flo.cbrp3.c-base.org/bar-history/)
 * [bar status](http://c-flo.cbrp3.c-base.org/bar-status/)
 * [internet traffic](http://c-flo.cbrp3.c-base.org/internet/)
