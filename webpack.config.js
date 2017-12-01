@@ -2,6 +2,7 @@ module.exports = {
   entry: {
     infoscreens: './index.js',
     infodisplay: './infodisplay/infodisplay.js',
+    calendar: './events/calendar.js',
   },
   output: {
     path: __dirname,

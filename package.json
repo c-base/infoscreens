@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "pretest": "eslint lib/*.js elements/*.js infodisplay/*.js index.js",
+    "pretest": "eslint index.js lib/*.js elements/*.js infodisplay/*.js events/*.js",
     "start": "http-server . -p 3000 -s",
     "test": "npm run build"
   },
