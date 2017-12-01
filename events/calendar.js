@@ -6,7 +6,7 @@ function getEvents(number) {
   const allEvents = window.c_base_events.concat(window.c_base_regulars);
   const current = allEvents.filter((event) => {
     const start = new Date(event.start);
-    if (!event.end) {
+    if ((!event.data || event.allDay) && start.toDateString() !== now.toDateString()) {
       return false;
     }
     const end = new Date(event.end);
