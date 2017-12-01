@@ -96,10 +96,18 @@ function renderEvent(event, container) {
   prevDate = startDate;
 }
 
-function onPageReady() {
-  window.removeEventListener('load', onPageReady, false);
+function render() {
   const table = document.getElementById('events');
+  while (table.firstChild) {
+    table.removeChild(table.firstChild);
+  }
   const events = getEvents(17);
   events.forEach(event => renderEvent(event, table));
+}
+
+function onPageReady() {
+  window.removeEventListener('load', onPageReady, false);
+  render();
+  setInterval(render, 30000);
 }
 window.addEventListener('load', onPageReady, false);
