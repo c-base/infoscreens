@@ -95,7 +95,7 @@ class Polar extends Component {
           result[idx] += val;
         });
       });
-      graphData[0].r = result.map(r => (r / ts.days) * 100);
+      graphData[0].r = result.map(r => Math.round((r / ts.days) * 100));
     } else {
       data.forEach((day, dayIdx) => {
         day.forEach((val, idx) => {
