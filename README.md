@@ -5,6 +5,8 @@ c-base information displays [![Build Status](https://travis-ci.org/c-base/infosc
 
 These displays work by rendering different HTML screens loaded from a URL. The info displays each have their own rotation of URLs configured that they switch at frequent intervals. In addition it is possible to trigger a custom URL to be opened by a screen by sending it a [MsgFlo](https://msgflo.org/) message.
 
+![Workshop dashboard screen](https://i.imgur.com/ivhN7z1.jpg)
+
 We have several implementations of the infodisplay software:
 
 * [browser infodisplay](https://github.com/c-base/infoscreens/tree/master/infodisplay) -- the primary implementation used by our static info displays, running in Chrome kiosk mode
