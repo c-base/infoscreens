@@ -96,7 +96,7 @@ function onPageReady() {
       'http://c-beam.cbrp3.c-base.org/he1display',
       'https://c-base.org',
     ],
-    timer: 120000,
+    timer: 60000,
   });
   const p = DisplayParticipant(params.broker, params.role, params.urls, params.timer);
   p.start((err) => {
