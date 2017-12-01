@@ -25,7 +25,7 @@ The [host\_vars folder](https://github.com/c-base/c-flo/tree/master/ansible/host
 
 ## Screens available
 
-The URLs give here will generally only work inside the c-base member network.
+The URLs given here will generally only work inside the c-base member network.
 
 ### Area-specific dashboards
 
