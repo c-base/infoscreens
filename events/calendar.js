@@ -1,7 +1,5 @@
 import dateformat from 'dateformat';
-import timeElement from '../elements/time';
-
-export default timeElement;
+import '../elements/time';
 
 function getEvents(number) {
   const now = new Date();
@@ -68,7 +66,7 @@ function renderEvent(event, container) {
     time.innerHTML = dateformat(startDate, timeFormat);
   }
 
-  code.innerHTML = `CB${pad(event.id)}`;
+  code.innerHTML = `C${pad(event.id)}`;
   destination.innerHTML = event.title;
 
   if (startDate.toDateString() !== prevDate.toDateString()) {

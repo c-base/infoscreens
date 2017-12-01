@@ -15,13 +15,16 @@
         margin-left: auto;
         margin-right: auto;
         overflow-y: hidden;
+        margin-left: 3vw;
+        margin-right: 3vw;
       }
       #events td {
         font-size: 7vmin;
         vertical-align: top;
+        text-shadow: #000000 1px 0 10px;
       }
       #events tr {
-        margin-bottom: 6vh;
+        margin-bottom: 16vh;
       }
       #events tr.today {
         color: #fff;
@@ -30,6 +33,8 @@
         color: hsl(35, 98%, 36%);
         font-weight: bold;
         max-width: 46vw;
+        max-height: 17vmin;
+        padding-right: 2vw;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -39,15 +44,21 @@
       #events td.code {
         font-family: 'ceva', sans-serif;
       }
+      #events td.time {
+        padding-left: 2vw;
+        padding-right: 2vw;
+      }
       #events td.status {
+        text-align: right;
         text-transform: lowercase;
         white-space: nowrap;
-        padding-right: 2vw;
         padding-top: 2vmin;
         font-size: 5vmin;
       }
       #events tr.today td.status {
         background-color: hsl(35, 98%, 46%);
+        text-align: center;
+        text-shadow: none;
         padding-top: 0px;
         font-size: 7vmin;
         color: #000;
@@ -68,12 +79,14 @@
         position: absolute;
         left: 0px;
         bottom: 0px;
+        margin-left: 3vw;
       }
       #current-time {
         position: absolute;
         right: 0px;
         bottom: 0px;
         text-align: right;
+        margin-right: 3vw;
       }
       @media (orientation: portrait) {
         #events td.code {
@@ -82,7 +95,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="station">
     <h1 id="screen-title">c-base events</h1>
     <table id="events">
     </table>
