@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="../theme/c-base.css">
     <style>
       h1 {
-        font-size: 8vmin;
+        font-size: 6vmin;
         width: 100vw;
         text-align: center;
-        margin: 0px;
-        padding: 0px;
-        line-height: 10vmin;
+        line-height: 8vmin;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
       }
       main {
         display: flex;
@@ -33,8 +33,8 @@
         text-align: center;
       }
       cbase-polar {
-        height: 70vmin;
-        width: 70vmin;
+        height: 65vmin;
+        width: 65vmin;
       }
       @media (orientation: portrait) {
         p {
@@ -47,7 +47,7 @@
   <body class="station">
     <main>
       <h1>bar historical data</h1>
-      <cbase-polar timeseries="bar.open" days="90" size="70" percentage></cbase-polar>
+      <cbase-polar timeseries="bar.open" days="90" size="65" percentage></cbase-polar>
       <p>
         Likelihood of bar being open at a given hour. Based on last 90 days.
       </p>
