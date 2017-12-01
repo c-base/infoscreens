@@ -89,6 +89,15 @@
   </head>
   <body class="station">
     <main>
+      <section id="lab-motion">
+        <h2>activity level</h2>
+        <cbase-heatmap timeseries="motion.weltenbaulab" accumulate days="5" width="69" height="40"></cbase-heatmap>
+      </section>
+      <section id="drinks-status">
+        <cbase-currentstate id="bar-status" timeseries="bar.open" interval="10">bar</cbase-currentstate>
+        <cbase-currentstate id="replicator-beer-1" timeseries="bar.replicator.2" interval="120">berliner 1</cbase-currentstate>
+        <cbase-currentstate id="replicator-beer-2" timeseries="bar.replicator.3" interval="120">berliner 2</cbase-currentstate>
+      </section>
       <section id="climate-temperature">
         <h2>temperature</h2>
         <cbase-linechart timeseries="clima.temperature.weltenbaulab clima.temperature.soundlab" width="34" height="40"></cbase-linechart>
@@ -96,15 +105,6 @@
       <section id="climate-humidity">
         <h2>humidity</h2>
         <cbase-linechart timeseries="clima.humidity.weltenbaulab clima.humidity.soundlab" width="34" height="40"></cbase-linechart>
-      </section>
-      <section id="drinks-status">
-        <cbase-currentstate id="bar-status" timeseries="bar.open" interval="10">bar</cbase-currentstate>
-        <cbase-currentstate id="replicator-beer-1" timeseries="bar.replicator.2" interval="120">berliner 1</cbase-currentstate>
-        <cbase-currentstate id="replicator-beer-2" timeseries="bar.replicator.3" interval="120">berliner 2</cbase-currentstate>
-      </section>
-      <section id="lab-motion">
-        <h2>activity level</h2>
-        <cbase-heatmap timeseries="motion.weltenbaulab" accumulate days="5" width="69" height="40"></cbase-heatmap>
       </section>
       <section id="lab-history">
         <h2>c-lab (last 9d)</h2>
