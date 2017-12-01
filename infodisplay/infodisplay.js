@@ -63,7 +63,7 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
       next.onload = null;
       next.onerror = null;
       participant.send('open', getRotationUrl(urls, indata));
-      callback('open', err);
+      callback('opened', err);
     };
     next.onload = () => {
       next.onload = null;
