@@ -15,7 +15,7 @@ We have several implementations of the infodisplay software:
 
 The standard MsgFlo signature provides an `open` inport for sending new URLs for a display to open, and `opened` outport to tell when a URL has been opened:
 
-![Info display as seen in Flowhub](https://i.imgur.com/iRbjFdH.png)
+![Info display as seen in Flowhub](https://i.imgur.com/JO50dWR.png)
 
 ## Updating URL lists
 
