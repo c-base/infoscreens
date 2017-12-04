@@ -3,6 +3,7 @@ import heatmap from './elements/heatmap';
 import linechart from './elements/linechart';
 import polar from './elements/polar';
 import time from './elements/time';
+import userlist from './elements/userlist';
 
 export default {
   currentstate,
@@ -10,4 +11,5 @@ export default {
   linechart,
   polar,
   time,
+  userlist,
 };
