@@ -1,15 +1,23 @@
 import { withComponent, props } from 'skatejs';
 
 function renderTime(duration) {
-  let seconds = parseInt((duration)%60)
-  let minutes = parseInt((duration/(60))%60)
-  let hours = parseInt(duration/(60*60));
+  const time = parseInt(duration, 10);
+  let seconds = parseInt((time) % 60, 10);
+  let minutes = parseInt((time / (60)) % 60, 10);
+  let hours = parseInt(time / (60 * 60), 10);
 
-  hours = (hours < 10) ? "0" + hours : hours;
-  minutes = (minutes < 10) ? "0" + minutes : minutes;
-  seconds = (seconds < 10) ? "0" + seconds : seconds;
+  hours = (hours < 10) ? `0${hours}` : hours;
+  minutes = (minutes < 10) ? `0${minutes}` : minutes;
+  seconds = (seconds < 10) ? `0${seconds}` : seconds;
 
-  return hours + ":" + minutes + ":" + seconds;
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+function renderProgress(elapsed, total) {
+  if (!parseInt(total, 10)) {
+    return '<progress></progress>';
+  }
+  return `<progress min="0" max="${total}" value="${elapsed}"></progress>`;
 }
 
 const Component = withComponent();
@@ -41,11 +49,11 @@ class MPD extends Component {
   }
 
   fetchData() {
-    const url = `https://c-beam.cbrp3.c-base.org/mpd/${this.mpd}/status/?_${Date.now()}`;
+    const url = `https://c-beam.cbrp3.c-base.org/mpd/${this.mpd}/status/?_=${Date.now()}`;
     fetch(url, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
-      }
+      },
     })
       .then(data => data.json())
       .then((data) => {
@@ -66,21 +74,27 @@ class MPD extends Component {
     if (!data.state) {
       return el;
     }
+    el.className = data.state;
     let status = 'Stopped';
-    if (data.state === 'play') {
-      status = 'Now playing';
+    if (data.state === 'pause') {
+      status = `${renderProgress(data.elapsed, data.total)} paused`;
     }
-    let artist = data.current_song.artist ? `${data.current_song.artist} - ${data.current_song.album}` : data.current_song.name
+    if (data.state === 'play') {
+      status = `${renderProgress(data.elapsed, data.total)} ${renderTime(data.elapsed)}/${renderTime(data.total)}`;
+    }
+    let artist = data.current_song.artist ? `${data.current_song.artist} - ${data.current_song.album}` : data.current_song.name;
     if (!artist) {
       artist = 'Unknown';
     }
-    const elapsed = 
+    let volume = parseInt(data.volume, 10);
+    if (volume < 0) {
+      volume = 0;
+    }
     el.innerHTML = `
-      <div>${status}</div>
       <div>${artist}</div>
       <div>${data.current_song.title}</div>
-      <div>${renderTime(data.elapsed)}/${renderTime(data.total)}</div>
-      <div>&#128264; <progress min="0" max="100" value="${data.volume}"></progress></div>
+      <div>${status}</div>
+      <div><progress min="0" max="100" value="${volume}"></progress> &#128264; ${volume}</div>
     `;
     return el;
   }
