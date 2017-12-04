@@ -3,8 +3,11 @@ import '../elements/time';
 
 function getEvents(number) {
   const now = new Date();
-  const allEvents = window.c_base_events.concat(window.c_base_regulars);
+  const allEvents = window.c_base_events.concat(window.c_base_regulars, window.c_base_seminars);
   const current = allEvents.filter((event) => {
+    if (event.id === 45) {
+      return false;
+    }
     const start = new Date(event.start);
     if ((!event.data || event.allDay) && start.toDateString() !== now.toDateString()) {
       return false;
@@ -19,6 +22,9 @@ function getEvents(number) {
     return true;
   });
   const upcoming = allEvents.filter((event) => {
+    if (event.id === 45) {
+      return false;
+    }
     const start = new Date(event.start);
     if (start > now) {
       return true;
