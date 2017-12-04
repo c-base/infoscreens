@@ -11,6 +11,7 @@
     "document": false,
     "fetch": false,
     "Plotly": false,
+    "WebSocket": false,
     "window": false
   },
   "settings": {

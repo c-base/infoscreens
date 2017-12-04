@@ -1,6 +1,7 @@
 import { withComponent, props } from 'skatejs';
 import { colors } from '../lib/colors';
 import { parseValue } from '../lib/values';
+import { subscribe } from '../lib/liveupdate';
 import injectCss from '../lib/plotly-shadowdom';
 
 const Component = withComponent();
@@ -35,11 +36,13 @@ class LineChart extends Component {
     const days = this.days || 1;
     const endDate = new Date();
     const startDate = new Date();
+    const series = this.timeseries.split(' ');
     startDate.setDate(startDate.getDate() - days);
-    const promises = this.timeseries.split(' ').map(dataset => this.fetch(dataset, startDate, endDate));
+    const promises = series.map(dataset => this.fetch(dataset, startDate, endDate));
     Promise.all(promises)
       .then((res) => {
         this.data = res;
+        this.subscribe(series);
       });
   }
 
@@ -49,8 +52,25 @@ class LineChart extends Component {
       .then(data => data.json());
   }
 
+  subscribe(timeseries) {
+    subscribe(timeseries, (data) => {
+      if (!this.el) {
+        return;
+      }
+      const dataIdx = timeseries.indexOf(data.id);
+      if (dataIdx === -1) {
+        return;
+      }
+      Plotly.extendTraces(this.el, {
+        y: [[parseValue(data.value)]],
+        x: [[new Date(data.timestamp)]],
+      }, [dataIdx]);
+    });
+  }
+
   renderer(renderRoot, render) {
     const root = renderRoot;
+    this.el = null;
     while (root.firstChild) {
       root.removeChild(root.firstChild);
     }
@@ -129,6 +149,7 @@ class LineChart extends Component {
     Plotly.newPlot(el, graphData, layout, {
       staticPlot: true,
     });
+    this.el = el;
     return el;
   }
 }
