@@ -53,7 +53,7 @@ class UserList extends Component {
         -webkit-animation-timing-function:ease-in-out;
         -webkit-animation-direction: alternate;
       }
-    `))
+    `));
     root.appendChild(styles);
   }
 
