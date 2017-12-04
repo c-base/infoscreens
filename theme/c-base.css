@@ -39,7 +39,7 @@ h1 {
 body.station {
   background-image: url('../theme/background-stationblueprint.jpg');
   background-repeat: no-repeat;
-  background-size: 'cover';
+  background-size: auto 100vh;
 }
 body.station:after {
   content: '\A';
