@@ -53,6 +53,12 @@ class UserList extends Component {
         -webkit-animation-timing-function:ease-in-out;
         -webkit-animation-direction: alternate;
       }
+      span.output {
+        color: #fff;
+      }
+      span.prompt {
+        color: #a0a0a0;
+      }
     `));
     root.appendChild(styles);
   }
@@ -61,10 +67,10 @@ class UserList extends Component {
     const el = document.createElement('div');
     el.className = 'terminal';
     el.innerHTML = `
-      <div>user@c-beam&gt; #who</div>
-      <div>${data.join(', ')}</div>
-      <div>total: ${data.length}</div>
-      <div>user@c-beam&gt; <blink>_</blink></div>
+      <div><span class="prompt">user@c-beam&gt;</span> #who</div>
+      <div><span class="output">${data.join(', ')}</span></div>
+      <div>total: <span class="output">${data.length}</span></div>
+      <div><span class="prompt">user@c-beam&gt;</span> <blink>_</blink></div>
     `;
     return el;
   }

@@ -67,6 +67,24 @@ class MPD extends Component {
       root.removeChild(root.firstChild);
     }
     root.appendChild(render());
+    const styles = document.createElement('style');
+    styles.appendChild(document.createTextNode(`
+      .artist, .song {
+        color: #fff;
+      }
+      progress {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 40%;
+      }
+      progress::-webkit-progress-bar {
+        background-color: #2e3436;
+      }
+      progress[value]::-webkit-progress-value {
+        background-color: hsl(35, 98%, 46%);
+      }
+    `));
+    root.appendChild(styles);
   }
 
   render({ data }) {
@@ -91,10 +109,10 @@ class MPD extends Component {
       volume = 0;
     }
     el.innerHTML = `
-      <div>${artist}</div>
-      <div>${data.current_song.title}</div>
+      <div class="artist">${artist}</div>
+      <div class="song">${data.current_song.title}</div>
       <div>${status}</div>
-      <div><progress min="0" max="100" value="${volume}"></progress> &#128264; ${volume}</div>
+      <div><progress min="0" max="100" value="${volume}"></progress> volume ${volume}</div>
     `;
     return el;
   }
