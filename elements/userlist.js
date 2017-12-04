@@ -1,4 +1,5 @@
 import { withComponent, props } from 'skatejs';
+import interpolate from 'color-interpolate';
 
 const Component = withComponent();
 class UserList extends Component {
@@ -71,11 +72,13 @@ class UserList extends Component {
 
   render({ data }) {
     const el = document.createElement('div');
+    const colormap = interpolate(['blue', 'green', 'yellow', 'red']);
+    const colorIndex = Math.min(data.length / 22, 22);
     el.className = 'terminal';
     el.innerHTML = `
       <div class="deco"><span class="prompt">user@c-beam&gt;</span> #who</div>
-      <div><span class="output">${data.join(', ')}</span></div>
-      <div>total: <span class="output">${data.length}</span></div>
+      <div><span class="output" style="color: ${colormap(colorIndex)}">${data.join(', ')}</span></div>
+      <div>total: <span class="output" style="color: ${colormap(colorIndex)}">${data.length}</span></div>
       <div class="deco"><span class="prompt">user@c-beam&gt;</span> <blink>_</blink></div>
     `;
     if (data.join(', ').length > 100) {
