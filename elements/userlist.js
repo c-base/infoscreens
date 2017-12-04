@@ -56,6 +56,9 @@ class UserList extends Component {
       .long .deco {
         display: none;
       }
+      .long .output {
+        font-size: smaller;
+      }
       span.output {
         color: #fff;
       }
