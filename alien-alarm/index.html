@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base alien alarm</title>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style>
+      body {
+        -webkit-animation-name: color;
+        -webkit-animation-duration: 0.6s;
+        -webkit-animation-iteration-count:infinite;
+        -webkit-animation-timing-function:ease-in-out;
+        -webkit-animation-direction: alternate;
+      }
+      h1 {
+        text-align: center;
+        font-size: 10vmin;
+        margin-top: 10vmin;
+        white-space: nowrap;
+        width: 100vw;
+        overflow: hidden;
+        color: black;
+        text-transform: lowercase;
+        line-height: 20vmin;
+        -webkit-animation-name: size;
+        -webkit-animation-duration: 0.6s;
+        -webkit-animation-iteration-count:infinite;
+        -webkit-animation-timing-function:ease-in-out;
+        -webkit-animation-direction: alternate;
+      }
+      img {
+        position: absolute;
+        left: 35vw;
+        top: 50vh;
+        width: 30vw;
+        -webkit-animation-name: move;
+        -webkit-animation-duration: 3s;
+        -webkit-animation-iteration-count:infinite;
+        -webkit-animation-timing-function:linear;
+        -webkit-animation-direction: alternate;
+      }
+      @-webkit-keyframes move {
+        from {
+          left: 10vw;
+        }
+        to {
+          left: 60vw;
+        }
+      }
+      @-webkit-keyframes color {
+        from {
+          background-color: hsl(0, 98%, 46%);
+        }
+        to {
+          background-color: hsl(35, 98%, 46%);
+        }
+      }
+      @-webkit-keyframes size {
+        from {
+          font-size: 10vmin;
+        }
+        to {
+          font-size: 16vmin;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Alien Alarm</h1>
+    <img src="alien.svg">
+  </body>
+</html>
