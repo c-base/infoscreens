@@ -43,6 +43,11 @@
         display: block;
         width: 20vw;
         height: 20vh;
+        color: #000;
+        font-family: 'ceva', sans-serif;
+        text-align: center;
+        font-size: 4vmin;
+        line-height: 20vh;
       }
       cbase-time, h1 {
         font-family: 'ceva', sans-serif;
@@ -72,36 +77,28 @@
   <body class="station">
     <main>
       <section>
-        <h2>bar status</h2>
-        <cbase-currentstate timeseries="bar.open" interval="10"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.open" interval="10">bar status</cbase-currentstate>
       </section>
       <section>
-        <h2>club mate</h2>
-        <cbase-currentstate timeseries="bar.replicator.1" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.1" interval="120">club mate</cbase-currentstate>
       </section>
       <section>
-        <h2>berliner 1</h2>
-        <cbase-currentstate timeseries="bar.replicator.2" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.2" interval="120">berliner 1</cbase-currentstate>
       </section>
       <section>
-        <h2>berliner 2</h2>
-        <cbase-currentstate timeseries="bar.replicator.3" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.3" interval="120">berliner 2</cbase-currentstate>
       </section>
       <section>
-        <h2>flora</h2>
-        <cbase-currentstate timeseries="bar.replicator.4" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.4" interval="120">flora</cbase-currentstate>
       </section>
       <section>
-        <h2>premiumcola</h2>
-        <cbase-currentstate timeseries="bar.replicator.5" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.5" interval="120">premiumcola</cbase-currentstate>
       </section>
       <section>
-        <h2>spezi</h2>
-        <cbase-currentstate timeseries="bar.replicator.6" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.6" interval="120">spezi</cbase-currentstate>
       </section>
       <section>
-        <h2>kraftmalz</h2>
-        <cbase-currentstate timeseries="bar.replicator.7" interval="120"></cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.7" interval="120">kraftmalz</cbase-currentstate>
       </section>
     </main>
     <cbase-linechart timeseries="bar.open crew.online" shape="vhv" width="84" height="30" days="2"></cbase-linechart>
