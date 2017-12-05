@@ -6,11 +6,7 @@
     <link rel="stylesheet" href="../theme/c-base.css">
     <style>
       body {
-        -webkit-animation-name: color;
-        -webkit-animation-duration: 0.6s;
-        -webkit-animation-iteration-count:infinite;
-        -webkit-animation-timing-function:ease-in-out;
-        -webkit-animation-direction: alternate;
+        animation: color 0.6s infinite linear alternate;
       }
       h1 {
         text-align: center;
@@ -22,24 +18,18 @@
         color: black;
         text-transform: lowercase;
         line-height: 20vmin;
-        -webkit-animation-name: size;
-        -webkit-animation-duration: 0.6s;
-        -webkit-animation-iteration-count:infinite;
-        -webkit-animation-timing-function:ease-in-out;
-        -webkit-animation-direction: alternate;
+        animation: size 0.6s infinite ease-in-out alternate;
       }
       img {
         position: absolute;
         left: 35vw;
         top: 50vh;
         width: 30vw;
-        -webkit-animation-name: move;
-        -webkit-animation-duration: 3s;
-        -webkit-animation-iteration-count:infinite;
-        -webkit-animation-timing-function:linear;
-        -webkit-animation-direction: alternate;
+        animation: moveleftright 3s infinite linear alternate,
+                   moveupdown 2s infinite ease-in-out alternate,
+                   flip 2s infinite ease-in-out alternate;
       }
-      @-webkit-keyframes move {
+      @keyframes moveleftright {
         from {
           left: 10vw;
         }
@@ -47,15 +37,40 @@
           left: 60vw;
         }
       }
-      @-webkit-keyframes color {
-        from {
-          background-color: hsl(0, 98%, 46%);
+      @keyframes moveupdown {
+        0%, 30% {
+          top: 50vh;
+          transform: scaleY(1)
         }
-        to {
-          background-color: hsl(35, 98%, 46%);
+        40% {
+          top: 25vh;
+          transform: scaleY(-1)
+        }
+        50%, 100% {
+          top: 50vh;
+          transform: scaleY(1)
         }
       }
-      @-webkit-keyframes size {
+      @keyframes flip {
+        0%, 35% {
+          transform: scaleY(1)
+        }
+        40% {
+          transform: scaleY(-1)
+        }
+        45%, 100% {
+          transform: scaleY(1)
+        }
+      }
+      @keyframes color {
+        0%, 20% {
+          background-color: hsl(35, 98%, 46%);
+        }
+        80%, 100% {
+          background-color: hsl(0, 98%, 46%);
+        }
+      }
+      @keyframes size {
         from {
           font-size: 10vmin;
         }
