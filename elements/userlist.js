@@ -72,13 +72,12 @@ class UserList extends Component {
 
   render({ data }) {
     const el = document.createElement('div');
-    const colormap = interpolate(['blue', 'green', 'yellow', 'red']);
-    const colorIndex = Math.min(data.length / 22, 22);
+    const colormap = interpolate(['#3465a4', '#729fcf', '#8ae234', '#fce94f', '#ef2929']);
+    const colorAtIndex = (val) => colormap(Math.min(val / 22, 22));
     el.className = 'terminal';
     el.innerHTML = `
       <div class="deco"><span class="prompt">user@c-beam&gt;</span> #who</div>
-      <div><span class="output" style="color: ${colormap(colorIndex)}">${data.join(', ')}</span></div>
-      <div>total: <span class="output" style="color: ${colormap(colorIndex)}">${data.length}</span></div>
+      <div><span class="output" style="color: ${colorAtIndex(data.length)}">${data.join(', ')}</span></div>
       <div class="deco"><span class="prompt">user@c-beam&gt;</span> <blink>_</blink></div>
     `;
     if (data.join(', ').length > 100) {
