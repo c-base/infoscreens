@@ -5,18 +5,10 @@
     <title>c-base bar status</title>
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="../node_modules/plotly.js/dist/plotly.min.js"></script>
     <script src="../dist/infoscreens.js"></script>
     <link rel="stylesheet" href="../theme/c-base.css">
     <style>
-      h1 {
-        font-size: 8vmin;
-        width: 100vw;
-        text-align: center;
-        margin: 0px;
-        margin-top: 5vh;
-        padding: 0px;
-        line-height: 10vmin;
-      }
       h2 {
         font-size: 3vmin;
         margin: 0px;
@@ -31,6 +23,7 @@
         margin-top: 5vh;
         margin-bottom: 5vh;
         display: flex;
+        height: 50vh;
         align-items: center;
         justify-content: center;
         flex-direction: row;
@@ -39,25 +32,44 @@
       main section {
         margin: 2px;
       }
+      cbase-linechart {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 90vw;
+        height: 40vh;
+      }
       cbase-currentstate {
         display: block;
         width: 20vw;
         height: 20vh;
       }
-      cbase-time {
+      cbase-time, h1 {
         font-family: 'ceva', sans-serif;
-        margin-top: 10vh;
-        display: block;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 8vmin;
+        font-weight: normal;
+        font-size: 6vmin;
+        line-height: 10vh;
         color: #fff;
+        margin: 0px;
+        padding: 0px;
+      }
+      #screen-title {
+        text-align: left;
+        padding-left: 3vw;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+      #current-time {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        text-align: right;
+        padding-right: 3vw;
       }
     </style>
   </head>
   <body class="station">
-    <h1>current drinks status</h1>
     <main>
       <section>
         <h2>bar status</h2>
@@ -92,7 +104,9 @@
         <cbase-currentstate timeseries="bar.replicator.7" interval="120"></cbase-currentstate>
       </section>
     </main>
-    <cbase-time interval="1"></cbase-time>
+    <cbase-linechart timeseries="bar.open crew.online" shape="vhv" width="84" height="30"></cbase-linechart>
+  <h1 id="screen-title">c-base bar</h1>
+    <cbase-time id="current-time" interval="1" format="HH:MM"></cbase-time>
   </body>
 </html>
 
