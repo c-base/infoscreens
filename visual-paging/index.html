@@ -5,21 +5,13 @@
     <title>c-base visual paging</title>
     <link rel="stylesheet" href="../theme/c-base.css">
     <style type="text/css">
-      h1 {
-        width: 100vw;
-        text-align: center;
-        position: absolute;
-        font-size: 6vmin;
-        top: 0px;
-        left: 0px;
-      }
       main {
         display: block;
-        min-height: 100%;
+        min-height: 90%;
         min-width: 100%;
         text-align: center;
         width: 100vw;
-        height: 100vh;
+        height: 90vh;
         position: absolute;
         top: 0px;
         left: 0px;
@@ -46,6 +38,29 @@
       p#announcement.long {
         font-size: 5vmin;
       }
+      #current-time, h1 {
+        font-family: 'ceva', sans-serif;
+        font-weight: normal;
+        font-size: 6vmin;
+        line-height: 10vh;
+        color: #fff;
+        margin: 0px;
+        padding: 0px;
+      }
+      #screen-title {
+        text-align: left;
+        padding-left: 3vw;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+      #current-time {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        text-align: right;
+        padding-right: 3vw;
+      }
       @media (orientation: portrait) {
         p#announcement {
           width: 95vw;
@@ -58,10 +73,11 @@
     </style>
   </head>
   <body class="station">
-    <h1>c-base space station</h1>
     <main>
       <p id="announcement"></p>
     </main>
+    <h1 id="screen-title">c-base space station</h1>
+    <span id="current-time"></span>
     <script>
       var fallback = 'Security advise. Due to intergalactic regulations, passengers are required to keep their antigravity generators with them at all times.';
       document.addEventListener('DOMContentLoaded', function () {
@@ -80,6 +96,22 @@
           container.className = 'long';
         }
         container.innerHTML = message;
+
+        var time = document.getElementById('current-time');
+        var setTime = function () {
+          var now = new Date();
+          var hours = now.getHours();
+          if (hours < 10) {
+            hours = '0' + hours;
+          }
+          var minutes = now.getMinutes();
+          if (minutes < 10) {
+            minutes = '0' + minutes;
+          }
+          time.innerHTML = hours + ':' + minutes;
+        };
+        setTime();
+        setInterval(setTime, 1);
       });
     </script>
   </body>
