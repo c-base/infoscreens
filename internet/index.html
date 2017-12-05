@@ -9,6 +9,20 @@
     <script src="../dist/infoscreens.js"></script>
     <link rel="stylesheet" href="../theme/c-base.css">
     <style>
+      main {
+        display: flex;
+        width: 98vw;
+        height: 90vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      h2 {
+        text-align: center;
+      }
+      cbase-linechart {
+        height: 80vh;
+      }
       #screen-title {
         text-align: left;
         padding-left: 3vw;
@@ -35,8 +49,11 @@
     </style>
   </head>
   <body class="station">
-    <cbase-linechart timeseries="echelon.kdg.rx echelon.kdg.tx echelon.ipb.rx echelon.ipb.tx" width="98" height="90"></cbase-linechart>
-    <h1 id="screen-title">c-base network traffic</h1>
+    <main>
+      <h2>network traffic</h2>
+      <cbase-linechart timeseries="echelon.kdg.rx echelon.kdg.tx echelon.ipb.rx echelon.ipb.tx" width="98" height="80"></cbase-linechart>
+    </main>
+    <h1 id="screen-title">c-base space station</h1>
     <cbase-time id="current-time" interval="1" format="HH:MM"></cbase-time>
   </body>
 </html>
