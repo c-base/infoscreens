@@ -35,9 +35,12 @@ The URLs given here will generally only work inside the c-base member network.
 * [c-lab (with music)](http://c-flo.cbrp3.c-base.org/c_lab-music/)
 * [soundlab](http://c-flo.cbrp3.c-base.org/soundlab/)
 * [weltenbaulab](http://c-flo.cbrp3.c-base.org/weltenbaulab/)
+* [nerdarea](http://c-flo.cbrp3.c-base.org/nerdarea/)
 * [nerdarea (with music)](http://c-flo.cbrp3.c-base.org/nerdarea-music/)
 * [workshop](http://c-flo.cbrp3.c-base.org/workshop/)
 * [workshop (with music)](http://c-flo.cbrp3.c-base.org/workshop-music/)
+* [robolab](http://c-flo.cbrp3.c-base.org/robolab/)
+* [robolab (with music)](http://c-flo.cbrp3.c-base.org/robolab-music/)
 
 There are also screens available from c-beam:
 
