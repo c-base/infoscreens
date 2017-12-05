@@ -4,6 +4,9 @@ const Component = withComponent();
 class CurrentState extends Component {
   static props = {
     timeseries: props.string,
+    trueword: props.string,
+    falseword: props.string,
+    unknownword: props.string,
     status: props.boolean,
     statusknown: props.boolean,
     interval: props.number,
@@ -52,21 +55,31 @@ class CurrentState extends Component {
     root.appendChild(render());
   }
 
-  render({ status, statusknown }) {
+  render({ status, statusknown, trueword, falseword, unknownword }) {
     const el = document.createElement('div');
     el.style.width = '100%';
     el.style.height = '100%';
+    let content = '<slot></slot>';
     if (!statusknown) {
       el.style.backgroundColor = '#555753';
-      el.innerHTML = '<slot></slot>';
+      if (unknownword) {
+        content = `${content} ${unknownword}`;
+      }
+      el.innerHTML = content;
       return el;
     }
     if (status) {
       el.style.backgroundColor = '#73d216';
+      if (trueword) {
+        content = `${content} ${trueword}`;
+      }
     } else {
       el.style.backgroundColor = '#cc0000';
+      if (falseword) {
+        content = `${content} ${falseword}`;
+      }
     }
-    el.innerHTML = '<slot></slot>';
+    el.innerHTML = content;
     return el;
   }
 }
