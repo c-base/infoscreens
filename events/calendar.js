@@ -68,6 +68,11 @@ function renderEvent(event, container) {
     }
     return val;
   };
+  const cleanTitle = (title) => {
+    let cleaned = title.replace(/\sBerlin$/, '');
+    cleaned = cleaned.replace(/\sUser Group/, ' UG');
+    return cleaned;
+  };
   const timeFormat = 'HH:MM';
   if (event.allDay) {
     time.innerHTML = '--:--';
@@ -76,7 +81,7 @@ function renderEvent(event, container) {
   }
 
   code.innerHTML = `C${pad(event.id)}`;
-  destination.innerHTML = event.title;
+  destination.innerHTML = cleanTitle(event.title);
 
   if (startDate.toDateString() !== prevDate.toDateString()) {
     status.innerHTML = dateformat(startDate, 'dd.mm.');
