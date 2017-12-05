@@ -73,7 +73,7 @@ class UserList extends Component {
   render({ data }) {
     const el = document.createElement('div');
     const colormap = interpolate(['#3465a4', '#729fcf', '#8ae234', '#fce94f', '#ef2929']);
-    const colorAtIndex = (val) => colormap(Math.min(val / 22, 22));
+    const colorAtIndex = val => colormap(Math.min(val / 22, 22));
     el.className = 'terminal';
     el.innerHTML = `
       <div class="deco"><span class="prompt">user@c-beam&gt;</span> #who</div>
