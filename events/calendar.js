@@ -1,7 +1,7 @@
 import dateformat from 'dateformat';
 import '../elements/time';
 
-function getEvents(number) {
+function getEvents(number, callback) {
   const now = new Date();
   const allEvents = window.c_base_events.concat(window.c_base_regulars, window.c_base_seminars);
   const current = allEvents.filter((event) => {
@@ -32,17 +32,45 @@ function getEvents(number) {
     return false;
   });
 
-  const events = current.concat(upcoming);
-  events.sort((a, b) => {
-    if (a.start < b.start) {
-      return -1;
-    }
-    if (a.start > b.start) {
-      return 1;
-    }
-    return 0;
+  fetch('https://launchlibrary.net/1.3/launch/next/1')
+  .then(res => res.json())
+  .then((res) => {
+    const launches = res.launches.map((launch) => {
+      return {
+        allDay: false,
+        start: new Date(launch.windowstart).toISOString(),
+        end: new Date(launch.windowend).toISOString(),
+        title: launch.name,
+        id: launch.lsp.abbrev,
+        type: 'launch',
+      };
+    });
+    const events = current.concat(upcoming, launches);
+    events.sort((a, b) => {
+      if (a.start < b.start) {
+        return -1;
+      }
+      if (a.start > b.start) {
+        return 1;
+      }
+      return 0;
+    });
+    console.log(events.slice(0, number));
+    return callback(events.slice(0, number));
+  })
+  .catch((e) => {
+    const events = current.concat(upcoming);
+    events.sort((a, b) => {
+      if (a.start < b.start) {
+        return -1;
+      }
+      if (a.start > b.start) {
+        return 1;
+      }
+      return 0;
+    });
+    return callback(events.slice(0, number));
   });
-  return events.slice(0, number);
 }
 
 let prevDate = new Date();
@@ -80,8 +108,15 @@ function renderEvent(event, container) {
     time.innerHTML = dateformat(startDate, timeFormat);
   }
 
-  code.innerHTML = `C${pad(event.id)}`;
+  if (typeof event.id === 'number') {
+    code.innerHTML = `C${pad(event.id)}`;
+  } else {
+    code.innerHTML = event.id;
+  }
   destination.innerHTML = cleanTitle(event.title);
+  if (event.type === 'launch') {
+    destination.classList.add('launch');
+  }
 
   if (startDate.toDateString() !== prevDate.toDateString()) {
     status.innerHTML = dateformat(startDate, 'dd.mm.');
@@ -106,11 +141,12 @@ function renderEvent(event, container) {
 
 function render() {
   const table = document.getElementById('events');
-  while (table.firstChild) {
-    table.removeChild(table.firstChild);
-  }
-  const events = getEvents(17);
-  events.forEach(event => renderEvent(event, table));
+  getEvents(17, (events) => {
+    while (table.firstChild) {
+      table.removeChild(table.firstChild);
+    }
+    events.forEach(event => renderEvent(event, table));
+  });
 }
 
 function onPageReady() {
