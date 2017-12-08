@@ -33,44 +33,45 @@ function getEvents(number, callback) {
   });
 
   fetch('https://launchlibrary.net/1.3/launch/next/1')
-  .then(res => res.json())
-  .then((res) => {
-    const launches = res.launches.map((launch) => {
-      return {
-        allDay: false,
-        start: new Date(launch.windowstart).toISOString(),
-        end: new Date(launch.windowend).toISOString(),
-        title: launch.name,
-        id: launch.lsp.abbrev,
-        type: 'launch',
-      };
+    .then(res => res.json())
+    .then((res) => {
+      const launches = res.launches.map((launch) => {
+        const start = new Date(launch.windowstart);
+        const end = new Date(launch.windowend);
+        return {
+          allDay: false,
+          start: start.toISOString(),
+          end: end.toISOString(),
+          title: launch.name,
+          id: launch.lsp.abbrev,
+          type: 'launch',
+        };
+      });
+      const events = current.concat(upcoming, launches);
+      events.sort((a, b) => {
+        if (a.start < b.start) {
+          return -1;
+        }
+        if (a.start > b.start) {
+          return 1;
+        }
+        return 0;
+      });
+      return callback(events.slice(0, number));
+    })
+    .catch(() => {
+      const events = current.concat(upcoming);
+      events.sort((a, b) => {
+        if (a.start < b.start) {
+          return -1;
+        }
+        if (a.start > b.start) {
+          return 1;
+        }
+        return 0;
+      });
+      return callback(events.slice(0, number));
     });
-    const events = current.concat(upcoming, launches);
-    events.sort((a, b) => {
-      if (a.start < b.start) {
-        return -1;
-      }
-      if (a.start > b.start) {
-        return 1;
-      }
-      return 0;
-    });
-    console.log(events.slice(0, number));
-    return callback(events.slice(0, number));
-  })
-  .catch((e) => {
-    const events = current.concat(upcoming);
-    events.sort((a, b) => {
-      if (a.start < b.start) {
-        return -1;
-      }
-      if (a.start > b.start) {
-        return 1;
-      }
-      return 0;
-    });
-    return callback(events.slice(0, number));
-  });
 }
 
 let prevDate = new Date();
