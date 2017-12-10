@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base alien alarm</title>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style>
+      body {
+        background-color: hsl(0, 98%, 46%);
+        animation: color 0.6s infinite linear alternate;
+      }
+      h1 {
+        text-align: center;
+        font-size: 15vmin;
+        margin-top: 10vmin;
+        white-space: nowrap;
+        width: 100vw;
+        overflow: hidden;
+        color: black;
+        text-transform: lowercase;
+        line-height: 17vmin;
+      }
+      h2 {
+        text-align: center;
+        font-size: 5vmin;
+        margin-top: 0vmin;
+        white-space: nowrap;
+        width: 100vw;
+        overflow: hidden;
+        color: black;
+        text-transform: lowercase;
+        line-height: 6vmin;
+      }
+      img {
+        position: absolute;
+        left: 35vw;
+        top: 50vh;
+        width: 30vw;
+        animation: moveleftright 3s infinite linear alternate,
+                   moveupdown 1.6s infinite ease-in-out alternate,
+                   flip 1.6s infinite ease-in-out alternate;
+      }
+      @keyframes moveleftright {
+        from {
+          left: 10vw;
+        }
+        to {
+          left: 60vw;
+        }
+      }
+      @keyframes moveupdown {
+        0%, 30% {
+          top: 50vh;
+          transform: scaleY(1)
+        }
+        40% {
+          top: 25vh;
+          transform: scaleY(-1)
+        }
+        50%, 100% {
+          top: 50vh;
+          transform: scaleY(1)
+        }
+      }
+      @keyframes flip {
+        0%, 35% {
+          transform: scaleY(1)
+        }
+        40% {
+          transform: scaleY(-1)
+        }
+        45%, 100% {
+          transform: scaleY(1)
+        }
+      }
+      @keyframes color {
+        0%, 20% {
+          background-color: hsl(35, 98%, 46%);
+        }
+        80%, 100% {
+          background-color: hsl(0, 98%, 46%);
+        }
+      }
+      @keyframes size {
+        from {
+          font-size: 10vmin;
+        }
+        to {
+          font-size: 16vmin;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Video Recording</h1>
+    <h2>There is video recording in the mainhall!</h2>
+    <img src="camera.svg">
+  </body>
+</html>
