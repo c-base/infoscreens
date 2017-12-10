@@ -32,7 +32,7 @@ function getEvents(number, callback) {
     return false;
   });
 
-  fetch('https://launchlibrary.net/1.3/launch/next/1')
+  fetch('https://launchlibrary.net/1.3/launch/next/2')
     .then(res => res.json())
     .then((res) => {
       const launches = res.launches.map((launch) => {
