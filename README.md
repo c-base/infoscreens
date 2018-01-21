@@ -42,6 +42,7 @@ The URLs given here will generally only work inside the c-base member network.
 * [workshop (with music)](http://c-flo.cbrp3.c-base.org/workshop-music/)
 * [robolab](http://c-flo.cbrp3.c-base.org/robolab/)
 * [robolab (with music)](http://c-flo.cbrp3.c-base.org/robolab-music/)
+* [he2](http://c-flo.cbrp3.c-base.org/he2/)
 
 There are also screens available from c-beam:
 
