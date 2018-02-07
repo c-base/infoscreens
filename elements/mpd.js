@@ -33,22 +33,17 @@ class MPD extends Component {
       return;
     }
     this.fetchData();
-    if (!this.interval) {
-      return;
-    }
-    this.runInterval = window.setInterval(() => {
-      this.fetchData();
-    }, this.interval * 1000);
   }
 
   disconnecting() {
-    if (this.runInterval) {
-      window.clearInterval(this.runInterval);
-      delete this.runInterval;
+    if (this.timeout) {
+      window.clearTimeout(this.timeout);
+      delete this.timeout;
     }
   }
 
   fetchData() {
+    delete this.timeout;
     const url = `https://c-beam.cbrp3.c-base.org/mpd/${this.mpd}/status/?_=${Date.now()}`;
     fetch(url, {
       headers: {
@@ -58,6 +53,12 @@ class MPD extends Component {
       .then(data => data.json())
       .then((data) => {
         this.data = data.content;
+        if (!this.interval) {
+          return;
+        }
+        this.timeout = window.setTimeout(() => {
+          this.fetchData();
+        }, this.interval * 1000);
       });
   }
 
