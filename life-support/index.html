@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base life support</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="../node_modules/plotly.js/dist/plotly.min.js"></script>
+    <script src="../dist/infoscreens.js"></script>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style>
+      main {
+        height: 88vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      #climate-temperature, #climate-humidity,
+      #climate-pm10, #climate-pm25 {
+        width: 35vw;
+        height: 45vh;
+      }
+      #lab-motion {
+        width: 70vw;
+        height: 45vh;
+      }
+      #drinks-status, #lab-history {
+        width: 30vw;
+        height: 45vh
+      }
+      cbase-currentstate {
+        display: block;
+        width: 30vw;
+        height: 8vh;
+        color: #000;
+        font-family: 'ceva', sans-serif;
+        text-align: center;
+        font-size: 4vmin;
+        line-height: 8vh;
+        margin-top: 1vh;
+        margin-bottom: 1vh;
+      }
+      cbase-polar {
+        width: 40vmin;
+        height: 40vmin;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #bar-status {
+        height: 23vh;
+        font-size: 12vmin;
+        line-height: 25vh;
+      }
+      section h2 {
+        line-height: 5vh;
+        font-size: 3vmin;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+      }
+      cbase-time, h1 {
+        font-family: 'ceva', sans-serif;
+        font-weight: normal;
+        font-size: 6vmin;
+        line-height: 10vh;
+        color: #fff;
+        margin: 0px;
+        padding: 0px;
+      }
+      #screen-title {
+        text-align: left;
+        padding-left: 3vw;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+      #current-time {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        text-align: right;
+        padding-right: 3vw;
+      }
+    </style>
+  </head>
+  <body class="station">
+    <main>
+      <section id="climate-pm10">
+        <h2>PM<sub>10</sub></h2>
+        <cbase-linechart timeseries="clima.pm10.mainhall clima.pm10.arboretum" width="34" height="40"></cbase-linechart>
+      </section>
+      <section id="climate-pm25">
+        <h2>PM<sub>2.5</sub></h2>
+        <cbase-linechart timeseries="clima.pm25.mainhall clima.pm25.arboretum" width="34" height="40"></cbase-linechart>
+      </section>
+      <section id="drinks-status">
+        <cbase-currentstate id="bar-status" timeseries="bar.open" interval="10">bar</cbase-currentstate>
+        <cbase-currentstate id="replicator-beer-1" timeseries="bar.replicator.2" interval="120">berliner 1</cbase-currentstate>
+        <cbase-currentstate id="replicator-beer-2" timeseries="bar.replicator.3" interval="120">berliner 2</cbase-currentstate>
+      </section>
+      <section id="climate-temperature">
+        <h2>temperature</h2>
+        <cbase-linechart timeseries="clima.temperature.mainhall clima.temperature.arboretum" width="34" height="40"></cbase-linechart>
+      </section>
+      <section id="climate-humidity">
+        <h2>humidity</h2>
+        <cbase-linechart timeseries="clima.humidity.mainhall clima.humidity.arboretum" width="34" height="40"></cbase-linechart>
+      </section>
+      <section id="softdrinks-status">
+        <cbase-currentstate timeseries="bar.replicator.1" interval="120">club mate</cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.4" interval="120">flora</cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.5" interval="120">premiumcola</cbase-currentstate>
+        <cbase-currentstate timeseries="bar.replicator.6" interval="120">spezi</cbase-currentstate>
+      </section>
+    </main>
+    <h1 id="screen-title">c-base life support</h1>
+    <cbase-time id="current-time" interval="1" format="HH:MM"></cbase-time>
+  </body>
+</html>
+
