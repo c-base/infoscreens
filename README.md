@@ -57,6 +57,7 @@ There are also screens available from c-beam:
 * [internet traffic](http://c-flo.cbrp3.c-base.org/internet/)
 * [alien alarm](http://c-flo.cbrp3.c-base.org/alien-alarm/)
 * [camera warning](http://c-flo.cbrp3.c-base.org/camera-warning/)
+* [life support](http://c-flo.cbrp3.c-base.org/life-support/)
 
 There are also screens available from c-beam:
 
