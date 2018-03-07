@@ -107,13 +107,12 @@ class LineChart extends Component {
       return res;
     });
 
-    const shapes = references.split(' ').map((spec, idx) => {
+    const shapes = references.split(' ').filter(spec => !isNaN(parseFloat(spec))).map((spec, idx) => {
       let colorIdx = data.length + idx;
       if (colorIdx > colors.length) {
         // Start cycle again
         colorIdx = idx;
       }
-      let color = colors[colorIdx];
       const res = {
         type: 'line',
         xref: 'paper', // x relative to [0,1] "paper" axis
@@ -123,7 +122,7 @@ class LineChart extends Component {
         y0: parseFloat(spec),
         y1: parseFloat(spec),
         line: {
-          color,
+          color: colors[colorIdx],
           width: 1,
         },
       };
