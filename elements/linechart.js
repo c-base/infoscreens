@@ -27,6 +27,7 @@ class LineChart extends Component {
     shape: props.string,
     width: props.number,
     height: props.number,
+    references: props.string,
   };
 
   connected() {
@@ -78,7 +79,7 @@ class LineChart extends Component {
     injectCss(root);
   }
 
-  render({ data, shape, width, height }) {
+  render({ data, shape, width, height, references }) {
     const el = document.createElement('div');
     if (!data || !data.length) {
       // No data yet
@@ -103,6 +104,24 @@ class LineChart extends Component {
       if (colors[idx]) {
         res.line.color = colors[idx];
       }
+      return res;
+    });
+
+    const shapes = references.split(' ').map((spec) => {
+      const s = spec.split(',');
+      const res = {
+        type: 'line',
+        xref: 'paper', // x relative to [0,1] "paper" axis
+        yref: 'y',
+        x0: 0,
+        x1: 1,
+        y0: s[0],
+        y1: s[0],
+        line: {
+          color: s[1],
+          width: 2.5,
+        },
+      };
       return res;
     });
     const layout = {
@@ -143,6 +162,7 @@ class LineChart extends Component {
         r: 0,
       },
       showlegend: showLegend,
+      shapes,
       paper_bgcolor: 'transparent',
       plot_bgcolor: 'transparent',
     };
