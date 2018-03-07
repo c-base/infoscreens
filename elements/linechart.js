@@ -107,7 +107,7 @@ class LineChart extends Component {
       return res;
     });
 
-    const shapes = references.split(' ').filter(spec => !isNaN(parseFloat(spec))).map((spec, idx) => {
+    const shapes = references.split(' ').filter(spec => !Number.isNaN(parseFloat(spec))).map((spec, idx) => {
       let colorIdx = data.length + idx;
       if (colorIdx > colors.length) {
         // Start cycle again
