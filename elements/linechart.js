@@ -107,19 +107,24 @@ class LineChart extends Component {
       return res;
     });
 
-    const shapes = references.split(' ').map((spec) => {
-      const s = spec.split(',');
+    const shapes = references.split(' ').map((spec, idx) => {
+      let colorIdx = data.length + idx;
+      if (colorIdx > colors.length) {
+        // Start cycle again
+        colorIdx = idx;
+      }
+      let color = colors[colorIdx];
       const res = {
         type: 'line',
         xref: 'paper', // x relative to [0,1] "paper" axis
         yref: 'y',
         x0: 0,
         x1: 1,
-        y0: s[0],
-        y1: s[0],
+        y0: parseFloat(spec),
+        y1: parseFloat(spec),
         line: {
-          color: s[1],
-          width: 2.5,
+          color,
+          width: 1,
         },
       };
       return res;
