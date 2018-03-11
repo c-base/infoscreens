@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "pretest": "eslint index.js lib/*.js elements/*.js infodisplay/*.js events/*.js",
-    "start": "http-server . -p 3000 -s",
+    "start": "http-server . -p 3000 -s -c-1",
     "test": "npm run build"
   },
   "author": "Henri Bergius <henri.bergius@iki.fi>",
