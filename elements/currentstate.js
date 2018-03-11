@@ -90,7 +90,6 @@ class CurrentState extends Component {
   }
 
   render({ status, statusknown, trueword, falseword, unknownword }) {
-    console.log(this.showrecent, this.recent);
     const el = document.createElement('div');
     el.style.width = '100%';
     el.style.height = '100%';
