@@ -14,7 +14,7 @@
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^1.0.19",
     "color-interpolate": "^1.0.2",
-    "d3": "^4.12.0",
+    "d3": "^5.3.0",
     "dateformat": "^3.0.2",
     "msgflo-browser": "^0.2.0",
     "plotly.js": "^1.31.2",
