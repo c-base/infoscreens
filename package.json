@@ -17,7 +17,7 @@
     "d3": "^4.12.0",
     "dateformat": "^3.0.2",
     "msgflo-browser": "^0.2.0",
-    "plotly.js": "^1.31.2",
+    "plotly.js": "1.39.4",
     "skatejs": "^5.0.0-beta.4"
   },
   "devDependencies": {
