@@ -1,3 +1,5 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   entry: {
     infoscreens: './index.js',
@@ -6,7 +8,7 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: 'dist/[name].js',
+    filename: 'dist/lib/[name].js',
     library: '[name]',
     libraryTarget: 'umd',
   },
@@ -20,11 +22,39 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env'],
             plugins: ['transform-class-properties'],
-          }
-        }
-      }
-    ]
+          },
+        },
+      },
+    ],
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: '**/index.html',
+        to: 'dist/',
+      },
+      {
+        from: '**/*.svg',
+        to: 'dist/',
+      },
+      {
+        from: 'theme/*',
+        to: 'dist/',
+      },
+      {
+        from: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js',
+        to: 'dist/vendor/webcomponentsjs/webcomponents-lite.js',
+      },
+      {
+        from: 'node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
+        to: 'dist/vendor/webcomponentsjs/custom-elements-es5-adapter.js',
+      },
+      {
+        from: 'node_modules/plotly.js/dist/plotly.min.js',
+        to: 'dist/vendor/plotly.js/plotly.min.js',
+      },
+    ]),
+  ],
   externals: {
     newrelic: 'commonjs newrelic',
     tv4: 'commonjs tv4',
