@@ -1,0 +1,15 @@
+version: '2'
+services:
+  mqtt-infoscreens:
+    image: toke/mosquitto
+    ports:
+      - '1882:9001'
+      - '1883:1883'
+  infoscreens:
+    image: cbase/infoscreens
+    ports:
+      - '8080:80'
+    links:
+      - mqtt-infoscreens
+    volumes:
+      - .:/usr/share/nginx/html
