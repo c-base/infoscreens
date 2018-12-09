@@ -6,16 +6,12 @@ services:
 before_script:
 - npm run build
 - docker build -t cbase/infoscreens:latest .
+- docker tag cbase/infoscreens:latest "cbase/infoscreens:${TRAVIS_BUILD_NUMBER}"
 - docker-compose up -d
 - docker-compose ps
 deploy:
 - provider: script
-  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker tag cbase/infoscreens:latest "cbase/infoscreens:${TRAVIS_TAG}" && docker push "cbase/infoscreens:${TRAVIS_TAG}"
-  on:
-    tags: true
-    repo: c-base/infoscreens
-- provider: script
-  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push "cbase/infoscreens:latest"
+  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push "cbase/infoscreens:latest" && docker push "cbase/infoscreens:${TRAVIS_BUILD_NUMBER}"
   on:
     branch: master
     repo: c-base/infoscreens
