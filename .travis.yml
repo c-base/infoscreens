@@ -4,6 +4,7 @@ node_js:
 services:
 - docker
 before_script:
+- npm run build
 - docker build -t cbase/infoscreens:latest .
 - docker-compose up -d
 - docker-compose ps
