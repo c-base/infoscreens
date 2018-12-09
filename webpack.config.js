@@ -1,3 +1,4 @@
+const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -7,11 +8,12 @@ module.exports = {
     calendar: './events/calendar.js',
   },
   output: {
-    path: __dirname,
-    filename: 'dist/lib/[name].js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'lib/[name].js',
     library: '[name]',
     libraryTarget: 'umd',
   },
+  mode: 'production',
   module: {
     rules: [
       {
@@ -31,27 +33,27 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: '**/index.html',
-        to: 'dist/',
+        to: './',
       },
       {
         from: '**/*.svg',
-        to: 'dist/',
+        to: './',
       },
       {
         from: 'theme/*',
-        to: 'dist/',
+        to: './',
       },
       {
         from: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js',
-        to: 'dist/vendor/webcomponentsjs/webcomponents-lite.js',
+        to: './vendor/webcomponentsjs/webcomponents-lite.js',
       },
       {
         from: 'node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
-        to: 'dist/vendor/webcomponentsjs/custom-elements-es5-adapter.js',
+        to: './vendor/webcomponentsjs/custom-elements-es5-adapter.js',
       },
       {
         from: 'node_modules/plotly.js/dist/plotly.min.js',
-        to: 'dist/vendor/plotly.js/plotly.min.js',
+        to: './vendor/plotly.js/plotly.min.js',
       },
     ]),
   ],
@@ -63,5 +65,10 @@ module.exports = {
   },
   node: {
     fs: 'empty',
+  },
+  devServer: {
+    host: process.env.HOST || 'localhost',
+    port: 3000,
+    inline: true,
   },
 };
