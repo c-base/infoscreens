@@ -15,6 +15,7 @@ class Heatmap extends Component {
     width: props.number,
     height: props.number,
   };
+
   connected() {
     if (!this.timeseries) {
       return;
@@ -30,6 +31,7 @@ class Heatmap extends Component {
         this.data = values;
       });
   }
+
   renderer(renderRoot, render) {
     const root = renderRoot;
     while (root.firstChild) {
