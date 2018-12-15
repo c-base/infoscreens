@@ -34,12 +34,12 @@ module.exports = {
       {
         from: '**/index.html',
         to: './',
-        ignore: ['node_modules/*'],
+        ignore: ['node_modules/**/*.html'],
       },
       {
         from: '**/*.svg',
         to: './',
-        ignore: ['node_modules/*'],
+        ignore: ['node_modules/**/*.svg'],
       },
       {
         from: 'theme/*',
