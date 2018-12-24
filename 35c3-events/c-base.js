@@ -1,5 +1,40 @@
 module.exports = [
   {
+     allDay: true,
+     start: "2018-12-24T15:24:51+0000",
+     end: "2018-12-24T15:24:51+0000",
+     title: "Gitterboxen durchfengeln lassen",
+     id: "c-base",
+   },
+   {
+     allDay: true,
+    start: "2018-12-24T15:24:51+0000",
+    end: "2018-12-24T15:24:51+0000",
+    title: "Lict planen",
+    id: "c-base",
+  },
+  {
+    allDay: true,
+    start: "2018-12-24T15:24:51+0000",
+    end: "2018-12-24T15:24:51+0000",
+    title: "Tischbeine holen, 22x4",
+    id: "c-base",
+  },
+  {
+    allDay: true,
+    start: "2018-12-24T15:24:51+0000",
+    end: "2018-12-24T15:24:51+0000",
+    title: "c-cretariat zuende bauen",
+    id: "c-base",
+  },
+  {
+    allDay: true,
+    start: "2018-12-24T15:24:51+0000",
+    end: "2018-12-24T15:24:51+0000",
+    title: "DMX-Kabel mit Gaffer/Teppich zur Antenne legen, von Fengel absegnen lassen",
+    id: "c-base",
+  },
+  {
     allDay: true,
     start: '2018-12-25T15:24:51+0000',
     end: '2018-12-25T15:24:51+0000',
