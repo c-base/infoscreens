@@ -28,11 +28,15 @@ class LineChart extends Component {
     width: props.number,
     height: props.number,
     references: props.string,
+    source: props.string,
   };
 
   connected() {
     if (!this.timeseries || !this.timeseries.length) {
       return;
+    }
+    if (!this.source) {
+      this.source = 'http://openmct.cbrp3.c-base.org';
     }
     const days = this.days || 1;
     const endDate = new Date();
@@ -48,7 +52,7 @@ class LineChart extends Component {
   }
 
   fetch(timeseries, start, end) {
-    const url = `http://openmct.cbrp3.c-base.org/telemetry/${timeseries}?start=${start.getTime()}&end=${end.getTime()}`;
+    const url = `${this.source}/telemetry/${timeseries}?start=${start.getTime()}&end=${end.getTime()}`;
     return fetch(url)
       .then(data => data.json());
   }
