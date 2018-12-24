@@ -1,4 +1,5 @@
 import dateformat from 'dateformat';
+import baseevents from './c-base';
 import '../elements/time';
 
 function sortEvents(a, b) {
@@ -47,6 +48,7 @@ function getEvents(number) {
       });
       return talks;
     })
+    .then(talks => baseevents.concat(talks))
     .then(talks => fetch('https://launchlibrary.net/1.3/launch/next/2')
       .then(res => res.json())
       .then((res) => {
