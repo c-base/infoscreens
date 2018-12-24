@@ -13,7 +13,7 @@ function sortEvents(a, b) {
 
 function getEvents(number) {
   const now = new Date();
-  return fetch('//airdrone.bergie.today:8080/35c3/fahrplan')
+  return fetch('http://c-flo.cbrp3.c-base.org/35c3/fahrplan')
     .then(res => res.json())
     .then((res) => {
       // res.schedule.conference.days[0].rooms.Adams[0]
