@@ -6,6 +6,7 @@ module.exports = {
     infoscreens: './index.js',
     infodisplay: './infodisplay/infodisplay.js',
     calendar: './events/calendar.js',
+    '35c3-calendar': './35c3-events/calendar.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

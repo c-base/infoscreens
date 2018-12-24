@@ -8,8 +8,8 @@ services:
   infoscreens:
     image: cbase/infoscreens
     ports:
-      - '8080:80'
+      - '8080:8080'
     links:
       - mqtt-infoscreens
     volumes:
-      - .:/usr/share/nginx/html
+      - ./dist:/var/infoscreens/dist
