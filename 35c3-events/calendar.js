@@ -1,5 +1,5 @@
 import dateformat from 'dateformat';
-import baseevents from './c-base';
+import cbaseevents from './c-base';
 import '../elements/time';
 
 function sortEvents(a, b) {
@@ -14,41 +14,48 @@ function sortEvents(a, b) {
 
 function getEvents(number) {
   const now = new Date();
-  return fetch('http://c-flo.cbrp3.c-base.org/35c3/fahrplan')
-    .then(res => res.json())
-    .then((res) => {
-      // res.schedule.conference.days[0].rooms.Adams[0]
-      const talks = [];
-      res.schedule.conference.days.forEach((day) => {
-        const dayEnd = new Date(day.day_end);
-        if (dayEnd < now) {
-          // Already done with this day
-          return;
-        }
-        Object.keys(day.rooms).forEach((room) => {
-          day.rooms[room].forEach((slot) => {
-            const start = new Date(slot.date);
-            const [durationH, durationM] = slot.duration.split(':').map(val => parseInt(val, 10));
-            const end = new Date(slot.date);
-            end.setHours(end.getHours() + durationH);
-            end.setMinutes(end.getMinutes() + durationM);
-            if (end < now) {
-              // This event is already over
-              return;
-            }
-            talks.push({
-              allDay: false,
-              start: start.toISOString(),
-              end: end.toISOString(),
-              title: slot.title,
-              id: room,
+  return Promise.resolve(cbaseevents)
+    .then(events => events.filter((e) => {
+      const endDate = new Date(e.end);
+      if (endDate < now) {
+        return false;
+      }
+      return true;
+    }))
+    .then(baseevents => fetch('http://c-flo.cbrp3.c-base.org/35c3/fahrplan')
+      .then(res => res.json())
+      .then((res) => {
+        // res.schedule.conference.days[0].rooms.Adams[0]
+        const talks = [];
+        res.schedule.conference.days.forEach((day) => {
+          const dayEnd = new Date(day.day_end);
+          if (dayEnd < now) {
+            // Already done with this day
+            return;
+          }
+          Object.keys(day.rooms).forEach((room) => {
+            day.rooms[room].forEach((slot) => {
+              const start = new Date(slot.date);
+              const [durationH, durationM] = slot.duration.split(':').map(val => parseInt(val, 10));
+              const end = new Date(slot.date);
+              end.setHours(end.getHours() + durationH);
+              end.setMinutes(end.getMinutes() + durationM);
+              if (end < now) {
+                // This event is already over
+                return;
+              }
+              talks.push({
+                allDay: false,
+                start: start.toISOString(),
+                end: end.toISOString(),
+                title: slot.title,
+                id: room,
+              });
             });
           });
         });
-      });
-      return talks;
-    })
-    .then(talks => baseevents.concat(talks))
+      })
+      .then(talks => baseevents.concat(talks)))
     .then(talks => fetch('https://launchlibrary.net/1.3/launch/next/2')
       .then(res => res.json())
       .then((res) => {
@@ -67,7 +74,6 @@ function getEvents(number) {
         return launches;
       })
       .then((launches) => {
-        console.log(launches, talks);
         const allEvents = talks.concat(launches);
         allEvents.sort(sortEvents);
         return allEvents.slice(0, number);
