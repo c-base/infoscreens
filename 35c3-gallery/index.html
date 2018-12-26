@@ -5,20 +5,19 @@
     <title>c-base photo gallery</title>
     <link rel="stylesheet" href="../theme/c-base.css">
     <style type="text/css">
+      body {
+        background-color: #000000;
+      }
       img {
+        position: absolute;
+        border: none;
         display: block;
-        min-height: 90%;
-        min-width: 100%;
         text-align: center;
+        object-fit: cover;
+        object-position: center center;
         width: 100vw;
         height: 90vh;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.3s ease-in-out;
+        transition: opacity 1s ease-in-out;
       }
       img#next {
         opacity: 0;
@@ -48,14 +47,16 @@
       }
     </style>
   </head>
-  <body class="station">
-    <img id="current">
-    <img id="next">
+  <body>
+    <main>
+      <img id="current">
+      <img id="next">
+    </main>
     <h1 id="screen-title">c-base @ 35C3</h1>
     <span id="current-time"></span>
     <script>
       var timeout;
-      var timer = 10000;
+      var timer = 5000;
       function getNextImage(images, current) {
         const newImage = images[Math.floor(Math.random() * images.length)];
         if (newImage === current && images.length > 1) {
