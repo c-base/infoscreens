@@ -17,5 +17,6 @@ RUN npm install --only=production
 
 # Map the volumes
 VOLUME /var/infoscreens/dist
+VOLUME /var/infoscreens/videos
 
 CMD npm start

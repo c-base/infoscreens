@@ -13,3 +13,4 @@ services:
       - mqtt-infoscreens
     volumes:
       - ./dist:/var/infoscreens/dist
+      - ./videos:/var/infoscreens/videos
