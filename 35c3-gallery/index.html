@@ -85,7 +85,11 @@
         next.setAttribute('src', image);
       }
       document.addEventListener('DOMContentLoaded', function () {
-        fetch('http://c-flo.cbrp3.c-base.org/pictures/space')
+        let gallery = 'space';
+        if (window.location.search) {
+          gallery = decodeURIComponent(window.location.search.substr(1));
+        }
+        fetch(`http://c-flo.cbrp3.c-base.org/pictures/${gallery}`)
           .then(res => res.json())
           .then((pictures) => {
             const withUrl = pictures.map(p => 'http://c-flo.cbrp3.c-base.org' + p);
