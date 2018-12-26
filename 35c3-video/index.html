@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base video player</title>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style type="text/css">
+      body {
+        background-color: #000000;
+      }
+      video {
+        display: block;
+        min-height: 90%;
+        min-width: 100%;
+        text-align: center;
+        width: 100vw;
+        height: 90vh;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #current-time, h1 {
+        font-family: 'ceva', sans-serif;
+        font-weight: normal;
+        font-size: 6vmin;
+        line-height: 10vh;
+        color: #fff;
+        margin: 0px;
+        padding: 0px;
+      }
+      #screen-title {
+        text-align: left;
+        padding-left: 3vw;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+      }
+      #current-time {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        text-align: right;
+        padding-right: 3vw;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="screen-title">c-base @ 35C3</h1>
+    <span id="current-time"></span>
+    <script>
+      var fallback = 'base-full-loop-1-green-blue';
+      var prefix = 'http://c-flo.cbrp3.c-base.org/videos/';
+      document.addEventListener('DOMContentLoaded', function () {
+        var file = fallback;
+        if (window.location.search) {
+          file = decodeURIComponent(window.location.search.substr(1));
+        }
+        var video = document.createElement('video');
+        video.setAttribute('src', prefix + file + '.mp4');
+        video.autoplay = true;
+        video.loop = true;
+        document.body.appendChild(video);
+
+        var time = document.getElementById('current-time');
+        var setTime = function () {
+          var now = new Date();
+          var hours = now.getHours();
+          if (hours < 10) {
+            hours = '0' + hours;
+          }
+          var minutes = now.getMinutes();
+          if (minutes < 10) {
+            minutes = '0' + minutes;
+          }
+          time.innerHTML = hours + ':' + minutes;
+        };
+        setTime();
+        setInterval(setTime, 10);
+      });
+    </script>
+  </body>
+</html>
