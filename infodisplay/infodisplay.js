@@ -85,12 +85,15 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
         window.onmessage = null;
         const now = new Date();
         if (!event.data
-          || !event.data.waitUntil
-          || event.data.waitUntil < now.getTime()) {
+          || !event.data.waitUntil) {
           return;
         }
         if (timeout) {
           clearTimeout(timeout);
+        }
+        if (event.data.waitUntil < now.getTime()) {
+          participant.send('open', getRotationUrl(urls, indata));
+          return;
         }
         timeout = setTimeout(() => {
           participant.send('open', getRotationUrl(urls, indata));
