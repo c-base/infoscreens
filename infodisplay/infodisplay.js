@@ -78,6 +78,16 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
         clearTimeout(timeout);
       }
       timeout = setTimeout(() => {
+        const now = new Date();
+        if (next.contentWindow
+          && next.contentWindow.waitUntil
+          && next.contentWindow.waitUntil > now.getTime()) {
+          // This view wants more time, let it run to completion
+          setTimeout(() => {
+            participant.send('open', getRotationUrl(urls, indata));
+          }, next.contentWindow.waitUntil - now.getTime());
+          return;
+        }
         participant.send('open', getRotationUrl(urls, indata));
       }, timer);
       callback('opened', null, next.getAttribute('src'));

@@ -62,6 +62,10 @@
         video.setAttribute('src', prefix + file + '.mp4');
         video.autoplay = true;
         video.loop = true;
+        video.addEventListener('playing', function () {
+          var now = new Date();
+          window.waitUntil = now.getTime() + ((video.duration - video.currentTime) * 1000);
+        });
         document.body.appendChild(video);
 
         var time = document.getElementById('current-time');
