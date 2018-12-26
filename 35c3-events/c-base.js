@@ -69,4 +69,32 @@ module.exports = [
     title: 'Abnahme',
     id: 'c-base',
   },
+  {
+    allDay: false,
+    start: '2018-12-26T18:00:00+0000',
+    end: '2018-12-26T18:00:00+0000',
+    title: 'Abnahme',
+    id: 'c-base',
+  },
+  {
+    allDay: false,
+    start: '2018-12-26T17:00:00+0000',
+    end: '2018-12-26T17:00:00+0000',
+    title: 'Kongressablaufs- und Abbauplanung Meeting',
+    id: 'c-base',
+  },
+  {
+    allDay: true,
+    start: '2018-12-26T17:00:00+0000',
+    end: '2018-12-26T17:00:00+0000',
+    title: 'Finale Ausrichtung der artefacte',
+    id: 'c-base',
+  },
+  {
+    allDay: true,
+    start: '2018-12-26T17:00:00+0000',
+    end: '2018-12-26T17:00:00+0000',
+    title: 'Microlabs Licht anbringen',
+    id: 'c-base',
+  },
 ];
