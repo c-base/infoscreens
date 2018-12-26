@@ -62,6 +62,7 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
       callback('opened', null, next.getAttribute('src'));
       return;
     }
+    window.onmessage = null;
     next.onerror = (err) => {
       next.onload = null;
       next.onerror = null;
@@ -80,6 +81,21 @@ function DisplayParticipant(broker, role, defaultUrls, timer) {
       timeout = setTimeout(() => {
         participant.send('open', getRotationUrl(urls, indata));
       }, timer);
+      window.onmessage = (event) => {
+        window.onmessage = null;
+        const now = new Date();
+        if (!event.data
+          || !event.data.waitUntil
+          || event.data.waitUntil < now.getTime()) {
+          return;
+        }
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+          participant.send('open', getRotationUrl(urls, indata));
+        }, event.data.waitUntil - now.getTime());
+      };
       callback('opened', null, next.getAttribute('src'));
     };
     next.setAttribute('src', indata);

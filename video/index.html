@@ -61,13 +61,17 @@
         var video = document.createElement('video');
         video.setAttribute('src', prefix + file + '.mp4');
         video.autoplay = true;
-        video.loop = true;
         video.addEventListener('playing', function () {
           if (window.waitUntil) {
             return;
           }
           var now = new Date();
           window.waitUntil = now.getTime() + ((video.duration - video.currentTime) * 1000);
+          if (window.parent) {
+            window.parent.postMessage({
+              waitUntil: window.waitUntil,
+            }, '*');
+          }
         });
         document.body.appendChild(video);
 
