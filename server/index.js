@@ -17,7 +17,11 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
   .use(Static(path.resolve(__dirname, '../dist'), {}))
-  .use(Mount('/videos', Static(path.resolve(__dirname, '../videos'), {})));
+  .use(Mount('/videos', Static(path.resolve(__dirname, '../videos'), {
+    setHeaders: (res) => {
+      res.setHeader('cache-control', 'immutable');
+    },
+  })));
 
 module.exports = app;
 if (!module.parent) {
