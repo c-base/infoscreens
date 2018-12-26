@@ -21,6 +21,11 @@ app
     setHeaders: (res) => {
       res.setHeader('cache-control', 'immutable');
     },
+  })))
+  .use(Mount('/pictures', Static(path.resolve(__dirname, '../pictures'), {
+    setHeaders: (res) => {
+      res.setHeader('cache-control', 'immutable');
+    },
   })));
 
 module.exports = app;
