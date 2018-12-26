@@ -63,6 +63,9 @@
         video.autoplay = true;
         video.loop = true;
         video.addEventListener('playing', function () {
+          if (window.waitUntil) {
+            return;
+          }
           var now = new Date();
           window.waitUntil = now.getTime() + ((video.duration - video.currentTime) * 1000);
         });
