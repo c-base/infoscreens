@@ -97,4 +97,11 @@ module.exports = [
     title: 'Microlabs Licht anbringen',
     id: 'c-base',
   },
+   {
+    allDay: false,
+    start: '2018-12-30T18:00:00+0100',
+    end: '2018-12-30T23:59:59+0100',
+    title: 'Abbau!',
+    id: 'c-base',
+  },
 ];
