@@ -35,6 +35,9 @@ function getEvents(number) {
           }
           Object.keys(day.rooms).forEach((room) => {
             day.rooms[room].forEach((slot) => {
+              if (!slot.date) {
+                return;
+              }
               const start = new Date(slot.date);
               const [durationH, durationM] = slot.duration.split(':').map(val => parseInt(val, 10));
               const end = new Date(slot.date);
@@ -54,6 +57,7 @@ function getEvents(number) {
             });
           });
         });
+        return talks;
       })
       .then(talks => baseevents.concat(talks)))
     .then(talks => fetch('https://launchlibrary.net/1.3/launch/next/2')
