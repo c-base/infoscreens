@@ -50,6 +50,9 @@
       };
       function prettyPrintTime(value) {
         var sec_num = parseInt(value, 10);
+        if (sec_num < 0) {
+          return '00:00';
+        }
         var hours   = Math.floor(sec_num / 3600);
         var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
         var seconds = sec_num - (hours * 3600) - (minutes * 60);
