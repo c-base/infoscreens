@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>c-base alien alarm</title>
+    <link rel="stylesheet" href="../theme/c-base.css">
+    <style>
+      body.alarm {
+        background-color: hsl(0, 98%, 46%);
+        animation: color 0.5s infinite linear alternate;
+      }
+      h1 {
+        text-align: center;
+        font-size: 20vmin;
+        margin-top: 10vmin;
+        white-space: nowrap;
+        width: 100vw;
+        overflow: hidden;
+        text-transform: lowercase;
+        line-height: 20vmin;
+      }
+      h2 {
+        text-align: center;
+        font-size: 16vmin;
+        text-transform: lowercase;
+        line-height: 20vmin;
+        font-weight: normal;
+      }
+      body.alarm h1, body.alarm h2 {
+        color: black;
+      }
+      @keyframes color {
+        0%, 20% {
+          background-color: hsl(35, 98%, 46%);
+        }
+        80%, 100% {
+          background-color: hsl(0, 98%, 46%);
+        }
+      }
+    </style>
+  </head>
+  <body class="station">
+    <h1 id="title">Crash Alarm</h1>
+    <h2 id="countdown">12:01</h2>
+    <script>
+      var fallback = {
+        time: '2038-01-19T03:14:07Z',
+        message: 'Crash Alarm',
+        body: 'station',
+      };
+      function prettyPrintTime(value) {
+        var sec_num = parseInt(value, 10);
+        var hours   = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+        if (hours < 1) {
+          return minutes+':'+seconds;
+        }
+        return hours+':'+minutes+':'+seconds;
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        var countdown = document.getElementById('countdown');
+        var display = {};
+        function updateCountDown() {
+          var now = new Date();
+          var seconds = (display.time.getTime() - now.getTime()) / 1000;
+          countdown.innerHTML = prettyPrintTime(seconds);
+          if (seconds > 0) {
+            setTimeout(updateCountDown, 1000);
+          }
+        }
+        var values = [];
+        if (window.location.search) {
+          values = decodeURIComponent(window.location.search.substr(1)).split('&');
+        }
+        display.time = new Date(values[0] || fallback.time);
+        display.message = values[1] || fallback.message;
+        display.body = values[2] || fallback.body;
+        var title = document.getElementById('title');
+        document.body.className = display.body;
+        title.innerHTML = display.message;
+        updateCountDown();
+      });
+    </script>
+  </body>
+</html>
