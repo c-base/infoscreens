@@ -87,6 +87,12 @@
         document.body.className = display.body;
         title.innerHTML = display.message;
         updateCountDown();
+        window.waitUntil = display.time.getTime();
+        if (window.parent) {
+          window.parent.postMessage({
+            waitUntil: window.waitUntil,
+          }, '*');
+        }
       });
     </script>
   </body>
