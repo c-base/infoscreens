@@ -89,9 +89,11 @@
         updateCountDown();
         window.waitUntil = display.time.getTime();
         if (window.parent) {
-          window.parent.postMessage({
-            waitUntil: window.waitUntil,
-          }, '*');
+          setTimeout(() => {
+            window.parent.postMessage({
+              waitUntil: window.waitUntil,
+            }, '*');
+          }, 10000);
         }
       });
     </script>
