@@ -110,7 +110,7 @@ function renderEvent(event, container) {
   }
 
   if (typeof event.id === 'number') {
-    code.innerHTML = `C${pad(event.id)}`;
+    code.innerHTML = `c${pad(event.id)}`;
   } else {
     code.innerHTML = event.id;
   }
