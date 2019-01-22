@@ -7,12 +7,14 @@ const path = require('path');
 
 const routePictures = require('./route/pictures');
 const route35c3 = require('./route/35c3');
+const routeCalendar = require('./route/calendar');
 
 const app = new Koa();
 const router = new Router();
 
 route35c3(router);
 routePictures(router);
+routeCalendar(router);
 
 app
   .use(Cors())
