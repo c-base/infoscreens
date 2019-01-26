@@ -5,13 +5,16 @@ services:
 - docker
 before_script:
 - npm run build
-- docker build -t cbase/infoscreens:latest .
-- docker tag cbase/infoscreens:latest "cbase/infoscreens:${TRAVIS_BUILD_NUMBER}"
+# Prepare cross-compiling environment if targeting ARM
+- if [ "$TARGET" == "raspberrypi3" ]; then docker run --rm --privileged multiarch/qemu-user-static:register --reset; fi
+# Build the Docker image
+- docker build -t "${DOCKER_IMAGE}:latest" -f $DOCKER_FILE .
+- docker tag "${DOCKER_IMAGE}:latest" "${DOCKER_IMAGE}:${TRAVIS_BUILD_NUMBER}"
 - docker-compose up -d
 - docker-compose ps
 deploy:
 - provider: script
-  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push "cbase/infoscreens:latest" && docker push "cbase/infoscreens:${TRAVIS_BUILD_NUMBER}"
+  script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push "${DOCKER_IMAGE}:latest" && docker push "${DOCKER_IMAGE}:${TRAVIS_BUILD_NUMBER}"
   on:
     branch: master
     repo: c-base/infoscreens
@@ -19,3 +22,8 @@ env:
   global:
   - secure: R0ZZ7VmLdTbVtFqB36KtxSn5S1noZH0D577atVfW+CSL35QLcyofoFo9xg223T51yZJyZMFOvxLuD7LZDL4FSBdoC6jfHQ7sluu/ZOCGEfKhxunjzhOjdIlL/zX7iBk03u5QI6qah+iIOohoqb0294qyNRQWa57Ut5lkeqJnsD9fsXrn0eqcC+Mbef+MLDqHWL/icXGjzq6GlKfaxd7sGK+UPCs8vfoyyGPkXeL97XjCJXt/RqwNhOJR3cMNko6xdIB1yBlJubaY7NgFfMTe8IxSPJGNPMaongrvT9/xjQdpBXd0Txi+LMCr4pjEHjhYj5DuXz40V9SS6LMNWQBUrEBr/tUyK4GdgGVcwXnrsTR4LPt2ivbg1hxI6gmK2n+Cj9l52JXAmTlN85174JXyRrXmRm+74A/uep6wZ6CnroBgunV24//b29A+Bbin6vpfqGvvQUlCuajnr6RBpovq/vQGHL1J8njnSt496V6BU2oD6qDx+EjW1vE4xXKKkB0XOMbiKUUh+3JUh48pR4f6uo7YSGRVjh2URR89q4C1ri80zxyEonTTFc2PM9qIikgvBTrM/XpDIGfsU9LJkwkd6sANTHlwv83S1MHM78dB0ZIgejnRSGnI6YD3GSzmQvsQcEAWwjoacAYGE5AYkkkN0GEzj96qSFdCZT/KBJ42YiU=
   - secure: KQNjlnKQ0lzH8r0yKBFqqNuVJnlcrROol9qs9Hvd91xwA3WeLAqaAPi4BwOulcWmdEl+KvzTKN1rfBbZ2dGMHN2T46VmXmwLfgQV34BLyr4l6uYu92D9t0Qg7i/euGvNq7F3fCK6ZdrKtcf5McPm0Q6mhTEg38jHvwSQaW4DD0ElET0sVzBZushQeD4wehjTh65yTJ7JNuMPBtXOogMvIQugkEH+i7Wmi1vrPKaxNLp6OYE1krbnm+sk9dM0CIxCO+OC2g8DChjYgIe+hw3G0zdyAcb0Jw0Hx/U8e90hIFG5UjgYvYDib3ifYoCe8GacT+JUMrRRSG9oM413X5E03f/W1R9tyJ0fh2xbiBhd0U26rwGKuta6OFP+QgQP1JTvlVk1iz+qwhlAsc7p98qyM1BNWNSlnfOBsHAGwY2wYwBPwKy4I+gKZ9HmBdVDrk6CGB6Qvgp0S6sGxJ6LIV4jmK0K9WswbckZLQXFpaxI0lPn/xfKwldS7OLIqxkPMGYbfo08axiJkecX/Vlw/0FmOkqk2SIchqRRi7CnhjOwOBLUuYeF1OzPw61dLUpB05gLKEx3jHqIawtSjPQVY8XZiWnPtmO5yIP4RNQniP43Oaf/0mW7up1+ZjN+/jx0reuhR33+EkCCEmzhB+p1P9LxEXnRpr1RF8p1y47b/JXfEqw=
+matrix:
+  include:
+  - env: TARGET=x86 DOCKER_IMAGE=cbase/infoscreens COMPOSE_FILE=docker-compose.yml DOCKER_FILE=Dockerfile
+  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-infoscreens COMPOSE_FILE=docker-compose-raspberrypi3.yml DOCKER_FILE=Dockerfile-raspberrypi3
+    sudo: true
