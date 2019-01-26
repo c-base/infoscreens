@@ -1,0 +1,17 @@
+version: '2'
+services:
+  mqtt-infoscreens:
+    image: ansi/raspberrypi3-mosquitto
+    ports:
+      - '1882:9001'
+      - '1883:1883'
+  infoscreens:
+    image: cbase/raspberrypi3-infoscreens
+    ports:
+      - '8080:8080'
+    links:
+      - mqtt-infoscreens
+    volumes:
+      - ./dist:/var/infoscreens/dist
+      - ./videos:/var/infoscreens/videos
+      - ./pictures:/var/infoscreens/pictures
