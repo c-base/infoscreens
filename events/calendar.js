@@ -3,74 +3,80 @@ import '../elements/time';
 
 function getEvents(number, callback) {
   const now = new Date();
-  const allEvents = window.c_base_events.concat(window.c_base_regulars, window.c_base_seminars);
-  const current = allEvents.filter((event) => {
-    if (event.id === 45) {
-      return false;
-    }
-    const start = new Date(event.start);
-    if ((!event.data || event.allDay) && start.toDateString() !== now.toDateString()) {
-      return false;
-    }
-    const end = new Date(event.end);
-    if (start > now) {
-      return false;
-    }
-    if (end < now) {
-      return false;
-    }
-    return true;
-  });
-  const upcoming = allEvents.filter((event) => {
-    if (event.id === 45) {
-      return false;
-    }
-    const start = new Date(event.start);
-    if (start > now) {
-      return true;
-    }
-    return false;
-  });
-
-  fetch('https://launchlibrary.net/1.3/launch/next/2')
+  fetch('/../calendar')
     .then(res => res.json())
-    .then((res) => {
-      const launches = res.launches.map((launch) => {
-        const start = new Date(launch.windowstart);
-        const end = new Date(launch.windowend);
-        return {
-          allDay: false,
-          start: start.toISOString(),
-          end: end.toISOString(),
-          title: launch.name,
-          id: launch.lsp.abbrev,
-          type: 'launch',
-        };
+    .then((calendars) => {
+      const allEvents = calendars.c_base_events.concat(
+        calendars.c_base_regulars, calendars.c_base_seminars,
+      );
+      const current = allEvents.filter((event) => {
+        if (event.id === 45) {
+          return false;
+        }
+        const start = new Date(event.start);
+        if ((!event.data || event.allDay) && start.toDateString() !== now.toDateString()) {
+          return false;
+        }
+        const end = new Date(event.end);
+        if (start > now) {
+          return false;
+        }
+        if (end < now) {
+          return false;
+        }
+        return true;
       });
-      const events = current.concat(upcoming, launches);
-      events.sort((a, b) => {
-        if (a.start < b.start) {
-          return -1;
+      const upcoming = allEvents.filter((event) => {
+        if (event.id === 45) {
+          return false;
         }
-        if (a.start > b.start) {
-          return 1;
+        const start = new Date(event.start);
+        if (start > now) {
+          return true;
         }
-        return 0;
+        return false;
       });
-      return callback(events.slice(0, number));
-    })
-    .catch(() => {
-      const events = current.concat(upcoming);
-      events.sort((a, b) => {
-        if (a.start < b.start) {
-          return -1;
-        }
-        if (a.start > b.start) {
-          return 1;
-        }
-        return 0;
-      });
-      return callback(events.slice(0, number));
+
+      fetch('https://launchlibrary.net/1.3/launch/next/2')
+        .then(res => res.json())
+        .then((res) => {
+          const launches = res.launches.map((launch) => {
+            const start = new Date(launch.windowstart);
+            const end = new Date(launch.windowend);
+            return {
+              allDay: false,
+              start: start.toISOString(),
+              end: end.toISOString(),
+              title: launch.name,
+              id: launch.lsp.abbrev,
+              type: 'launch',
+            };
+          });
+          const events = current.concat(upcoming, launches);
+          events.sort((a, b) => {
+            if (a.start < b.start) {
+              return -1;
+            }
+            if (a.start > b.start) {
+              return 1;
+            }
+            return 0;
+          });
+          return callback(events.slice(0, number));
+        })
+        .catch(() => {
+          const events = current.concat(upcoming);
+          events.sort((a, b) => {
+            if (a.start < b.start) {
+              return -1;
+            }
+            if (a.start > b.start) {
+              return 1;
+            }
+            return 0;
+          });
+          return callback(events.slice(0, number));
+        });
     });
 }
 
