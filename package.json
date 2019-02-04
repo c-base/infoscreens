@@ -15,7 +15,7 @@
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^1.0.19",
     "color-interpolate": "^1.0.2",
-    "d3": "^4.12.0",
+    "d3": "^5.8.1",
     "dateformat": "^3.0.2",
     "isomorphic-fetch": "^2.2.1",
     "koa": "^2.6.2",
