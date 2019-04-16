@@ -13,7 +13,7 @@
   "author": "Henri Bergius <henri.bergius@iki.fi>",
   "license": "MIT",
   "dependencies": {
-    "@webcomponents/webcomponentsjs": "^1.0.19",
+    "@webcomponents/webcomponentsjs": "^2.2.9",
     "color-interpolate": "^1.0.2",
     "d3": "^4.12.0",
     "dateformat": "^3.0.2",
