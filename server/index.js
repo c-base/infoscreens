@@ -3,6 +3,7 @@ const Router = require('koa-router');
 const Static = require('koa-static');
 const Cors = require('koa-cors');
 const Mount = require('koa-mount');
+const BodyParser = require('koa-bodyparser');
 const path = require('path');
 
 const routePictures = require('./route/pictures');
@@ -20,6 +21,7 @@ routeCBeamRPC(router);
 
 app
   .use(Cors())
+  .use(BodyParser())
   .use(router.routes())
   .use(router.allowedMethods())
   .use(Static(path.resolve(__dirname, '../dist'), {}))
