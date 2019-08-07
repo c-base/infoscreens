@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="606mm"
+   height="606mm"
+   viewBox="0 0 606 605.99998"
+   version="1.1"
+   id="svg823"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="Singapore_road_sign_-_Prohibitory_-_No_smoking.svg">
+  <defs
+     id="defs817" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="771.73894"
+     inkscape:cy="821.06523"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false" />
+  <metadata
+     id="metadata820">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,309)">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0664286;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect1368"
+       width="604"
+       height="604"
+       x="1"
+       y="-308"
+       rx="52"
+       ry="52" />
+    <rect
+       ry="50"
+       rx="50"
+       y="-306"
+       x="3"
+       height="600"
+       width="600"
+       id="rect1370"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.06598867;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
+    <circle
+       style="opacity:1;fill:#dc0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.07791566;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path814"
+       cx="303"
+       cy="-5.9999847"
+       r="280" />
+    <circle
+       r="220"
+       cy="-5.9999847"
+       cx="303"
+       id="circle816"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.06121945;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.37587899;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       d="M 118,30 H 436 V 82 H 118 Z"
+       id="rect901"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.35943362;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       d="m 447.6378,30 h 16 v 52 h -16 z"
+       id="rect903"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.37616029;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       d="m 471.9999,30 h 16 v 52 h -16 z"
+       id="rect905"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.38064343;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       id="path907"
+       d="m 353.2469,-178.7331 v 20.55394 c -44.5371,-3.80629 -55.5762,53.66864 -15.9877,63.56497 17.891,4.56754 27.4074,4.94818 25.8848,11.41885 l -3.0453,21.3152 c -0.3806,10.65759 5.3292,16.74765 14.8457,15.22513 h 48.3436 c 24.7428,0.76126 36.1626,16.36703 39.9692,41.10788 V 23 h -16.3684 l -0.3806,-28.16649 c -1.9033,-12.18012 -9.5165,-20.17332 -23.6008,-23.59898 h -54.8149 c -14.465,-1.90315 -22.8395,-9.51571 -25.1234,-22.45708 l 0.7613,-20.93456 c -35.7819,-6.47069 -54.4341,-23.97959 -52.9115,-54.81051 4.5679,-39.58537 28.1687,-52.90737 62.428,-51.76548 z"
+       class="fil2"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.38061258;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+       id="path909"
+       d="m 366.9506,-165 v 19.02834 c 34.6399,3.42512 47.2016,42.62352 22.8395,68.88262 -6.4712,9.1336 2.2839,15.22266 12.1811,16.36436 l 46.0596,6.8502 c 13.7037,4.5668 20.1749,17.88664 23.6008,35.77327 L 472.0123,23 H 488 v -43.76517 c -8.7552,-45.66801 -37.3046,-52.89878 -74.2284,-55.56276 26.2654,-44.14574 -8.3745,-86.76921 -46.821,-88.67207 z"
+       class="fil2"
+       inkscape:connector-curvature="0" />
+    <rect
+       y="-464.36081"
+       x="198.25479"
+       height="530"
+       width="60"
+       id="rect938"
+       style="opacity:1;fill:#dc0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.97209966;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:1.41400003;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       transform="rotate(40)" />
+  </g>
+</svg>
