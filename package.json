@@ -21,7 +21,7 @@
     "koa": "^2.6.2",
     "koa-cors": "0.0.16",
     "koa-mount": "^4.0.0",
-    "koa-router": "^7.4.0",
+    "koa-router": "^8.0.7",
     "koa-static": "^5.0.0",
     "msgflo-browser": "^0.2.0",
     "plotly.js": "^1.31.2",
