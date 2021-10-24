@@ -1,23 +1,32 @@
-FROM node:10-alpine
+FROM node:16-alpine AS builder
 
-# Reduce npm install verbosity, overflows Travis CI log view
-ENV NPM_CONFIG_LOGLEVEL warn
+WORKDIR /var/infoscreens
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . ./
+RUN npm run build
+
+FROM node:16-alpine
+
 ENV NODE_ENV production
 
-EXPOSE 8080
-
-RUN mkdir -p /var/infoscreens
 WORKDIR /var/infoscreens
-COPY package.json /var/infoscreens
-COPY server /var/infoscreens/server
-COPY dist /var/infoscreens/dist
 
 # Install NoFlo and dependencies
-RUN npm install --only=production
+COPY package.json package-lock.json ./
+RUN npm ci --only=production
+
+COPY server /var/infoscreens/server
+COPY --from=builder /var/infoscreens/dist /var/infoscreens/dist
 
 # Map the volumes
 VOLUME /var/infoscreens/dist
 VOLUME /var/infoscreens/videos
 VOLUME /var/infoscreens/pictures
 
+EXPOSE 8080
+
 CMD npm start
+
