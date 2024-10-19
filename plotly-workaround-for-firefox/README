@@ -1,0 +1,12 @@
+This is the official plotly.min.js of the plotly.js
+library version 1.58.5 with the following fix:
+
+return (
+  // Workaround for a bug in firefox, see https://bugzilla.mozilla.org/show_bug.cgi?id=756985
+  t.getCTM() === null ? 0 : t.getCTM().e
+)+t.getBBox().width
+
+This fix has been incorporated directly into the
+minified build, as it doesn't make a lot of sense
+to file a proper pull request to upstream for such
+an old version of the library.

@@ -55,7 +55,7 @@ module.exports = {
         to: './vendor/webcomponentsjs/custom-elements-es5-adapter.js',
       },
       {
-        from: 'node_modules/plotly.js/dist/plotly.min.js',
+        from: 'plotly-workaround-for-firefox/plotly.min.js',
         to: './vendor/plotly.js/plotly.min.js',
       },
     ]),
